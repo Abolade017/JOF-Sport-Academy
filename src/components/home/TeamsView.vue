@@ -41,7 +41,6 @@
               loading="lazy"
             />
 
-            <!-- subtle overlay for text contrast -->
             <div
               class="absolute inset-0 bg-linear-to-b from-transparent via-black/20 to-black/80"
             ></div>
