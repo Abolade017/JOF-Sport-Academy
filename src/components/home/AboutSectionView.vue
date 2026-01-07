@@ -1,7 +1,9 @@
 <template>
   <section class="bg-white">
-    <div class="py-24 max-w-[1300px] px-8 w-[50%] mx-auto">
-      <h1 class="text-[46px] leading-14 text-[#262626] font-bold tracking-[-1px] mb-8">
+    <div class="py-12 md:py-24 w-full md:max-w-[1300px] px-6 md:px-8 md:w-[50%] mx-auto">
+      <h1
+        class="text-[32px] md:text-[46px] md:leading-14 text-[#262626] font-bold md:tracking-[-1px] mb-8"
+      >
         Developing young athletes through discipline, opportunity, and world-class training.
       </h1>
       <p class="text-[22px] leading-8 text-color mb-8">

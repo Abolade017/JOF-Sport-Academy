@@ -18,9 +18,17 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/vue-fontawesome": "^3.1.2",
+    "@heroicons/vue": "^2.2.0",
+    "axios": "^1.13.2",
+    "libphonenumber-js": "^1.12.33",
     "pinia": "^3.0.4",
     "vue": "^3.5.25",
-    "vue-router": "^4.6.3"
+    "vue-router": "^4.6.3",
+    "vue-tel-num-input": "^0.1.10"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",

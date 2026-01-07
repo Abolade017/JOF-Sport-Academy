@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import HeaderView from './components/common/headerView.vue'
+import HeaderView from '@/components/common/headerView.vue'
+import Footer from '@/components/common/Footer.vue'
 </script>
 
 <template>
-  <HeaderView />
+  <div>
+    <HeaderView />
+    <RouterView />
+    <Footer />
+  </div>
 </template>
 
-<style scoped>
-.example {
-  color: red;
-}
-</style>
+<style scoped></style>

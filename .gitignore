@@ -37,3 +37,9 @@ __screenshots__/
 
 test-results/
 playwright-report/
+
+# Ignore generated Vue type and JS artifacts
+*.vue.d.ts
+*.vue.js
+src/**/*.vue.d.ts
+src/**/*.vue.js

@@ -1,6 +1,6 @@
 <template>
   <section class="bg-white">
-    <div class="max-w-[1300px] mx-auto px-6 lg:px-9 py-16 bg-[#030714]">
+    <div class="max-w-[1216px] mx-auto px-6 lg:px-9 py-16 bg-[#030714]">
       <h1 class="uppercase text-white text-4xl font-semibold tracking-tight mb-12">Our teams</h1>
 
       <div class="flex flex-col gap-y-6">
@@ -17,7 +17,6 @@
               loading="lazy"
             />
 
-            <!-- subtle overlay for text contrast -->
             <div
               class="absolute inset-0 bg-linear-to-b from-transparent via-black/20 to-black/80"
             ></div>
@@ -54,7 +53,6 @@
     </div>
   </section>
 </template>
-
 <script setup lang="ts">
 const teams = [
   {
