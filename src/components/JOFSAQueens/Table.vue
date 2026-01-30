@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, watch } from 'vue'
-import LatestNews from '../common/LatestNews.vue'
 import LeagueTable from '../common/LeagueTable.vue'
-import { LeagueTableRow } from '../../data'
 import { useLeaguetableStore } from '../../stores/UseLeagueTable'
-import Table from '../Fixtures/Table.vue'
 const props = defineProps<{
   filters: {
     team?: string
@@ -23,10 +20,10 @@ watch(
 const loading = computed(() => leagueTable.loading)
 const error = computed(() => leagueTable.error)
 const rankedTableRows = computed(() => {
-  // 1. Sort by points DESC
+  //  Sort by points DESC
   const sorted = [...leagueTable.table].sort((a, b) => b.points - a.points)
 
-  // 2. Assign positions based on points
+  //  Assign positions based on points
   let lastPoints: number | null = null
   let position = 0
 
@@ -48,7 +45,6 @@ const leagueTitle = computed(() => {
 
   const { competition, season_year } = leagueTable.table[0]
 
-  // Example: Nigerian Premier League 2025/2026
   return `${competition} ${season_year}/${season_year + 1}`
 })
 
