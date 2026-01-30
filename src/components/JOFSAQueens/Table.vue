@@ -1,8 +1,56 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { computed, onMounted, reactive, watch } from 'vue'
 import LatestNews from '../common/LatestNews.vue'
 import LeagueTable from '../common/LeagueTable.vue'
-import { LeagueTableRow } from '@/data'
+import { LeagueTableRow } from '../../data'
+import { useLeaguetableStore } from '../../stores/UseLeagueTable'
+import Table from '../Fixtures/Table.vue'
+const props = defineProps<{
+  filters: {
+    team?: string
+    year?: number
+  }
+}>()
+const leagueTable = useLeaguetableStore()
+onMounted(async () => {})
+watch(
+  () => props.filters,
+  async (newFilters) => {
+    await leagueTable.fetchLeagueTable(newFilters)
+  },
+  { immediate: true, deep: true },
+)
+const loading = computed(() => leagueTable.loading)
+const error = computed(() => leagueTable.error)
+const rankedTableRows = computed(() => {
+  // 1. Sort by points DESC
+  const sorted = [...leagueTable.table].sort((a, b) => b.points - a.points)
+
+  // 2. Assign positions based on points
+  let lastPoints: number | null = null
+  let position = 0
+
+  return sorted.map((row, index) => {
+    if (row.points !== lastPoints) {
+      position = index + 1
+      lastPoints = row.points
+    }
+
+    return {
+      ...row,
+      position,
+      goalDifference: row.goals_for - row.goals_against,
+    }
+  })
+})
+const leagueTitle = computed(() => {
+  if (!leagueTable.table.length) return ''
+
+  const { competition, season_year } = leagueTable.table[0]
+
+  // Example: Nigerian Premier League 2025/2026
+  return `${competition} ${season_year}/${season_year + 1}`
+})
 
 const liveScores = reactive({
   homeTeamScore: '2',
@@ -30,63 +78,63 @@ const News = reactive([
 </script>
 <template>
   <div class="max-w-[1250px] mx-auto">
-    <div class="flex flex-col space-x-0 md:flex-row md:space-x-10 px-4 md:px-0">
-      <div class="w-full md:w-2/3">
-        <LeagueTable title="Nigerian Premier League 2025-2026">
+    <div class="flex px-4 md:px-0">
+      <div class="w-full">
+        <LeagueTable :title="leagueTitle">
           <tr
-            v-for="(row, index) in LeagueTableRow"
+            v-for="(row, index) in rankedTableRows"
             :key="index"
             class="h-18 p-4 border-b border-b-[#DFE2E6]"
           >
             <td class="p-4 text-[#262626] md:text-base text-sm font-medium capitalize text-left">
-              {{ row.pos }}
+              {{ row.position }}
             </td>
             <td class="p-4 text-[#262626] md:text-base text-sm font-medium capitalize text-left">
               <div class="flex space-x-2 md:space-x-6 items-center">
                 <div>
-                  <img :src="row.teamLogo" alt="Team Logo" class="md:w-10 md:h-10 w-6 h-6" />
+                  <img :src="row.team.logo" alt=" Logo" class="md:w-10 md:h-10 w-6 h-6" />
                 </div>
-                <div class="md:text-base text-sm">{{ row.team }}</div>
+                <div class="md:text-base text-sm">{{ row.team.name }}</div>
               </div>
             </td>
             <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
-              {{ row.P }}
+              {{ row.played }}
             </td>
             <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
-              {{ row.W }}
+              {{ row.won }}
             </td>
             <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
-              {{ row.D }}
+              {{ row.draw }}
             </td>
             <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
-              {{ row.L }}
+              {{ row.lost }}
             </td>
             <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
-              {{ row.GF }}
+              {{ row.goals_for }}
             </td>
             <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
-              {{ row.GA }}
+              {{ row.goals_against }}
+            </td>
+            <!-- <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
+            {{ row.GD }}
+          </td> -->
+            <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
+              {{ row.goalDifference }}
             </td>
             <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
-              {{ row.GD }}
-            </td>
-            <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
-              {{ row.difference }}
-            </td>
-            <td class="p-4 text-[#262626] md:text-base font-medium capitalize text-left text-sm">
-              {{ row.Pts }}
+              {{ row.points }}
             </td>
           </tr></LeagueTable
         >
       </div>
-      <div class="w-full md:w-1/3 md:pt-0 pt-8">
+      <!-- <div class="w-full md:w-1/3 md:pt-0 pt-8">
         <div class="text-[#1F1F1F] text-lg md:text-[28px] font-bold font-zalando">LATEST NEWS</div>
         <div class="flex flex-col space-y-4 pt-4">
           <div v-for="(post, index) in News" :key="index">
             <LatestNews :image="post.image" :title="post.title" />
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

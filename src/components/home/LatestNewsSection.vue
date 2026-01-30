@@ -1,14 +1,37 @@
 <script setup lang="ts">
-import { ArrowLongRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/16/solid'
+import { ArrowLongRightIcon } from '@heroicons/vue/16/solid'
 import NewsPageSubHeader from '../common/NewsPageSubHeader.vue'
-import NextPrevButton from '../common/NextPrevButton.vue'
-import { articles } from '@/data'
-import { reactive, ref } from 'vue'
+import { articles } from '../../data'
 import FeaturedArticleCard from '../articles/FeaturedArticleCard.vue'
 import ArticleCard from '../articles/ArticleCard.vue'
-const isActive = ref(false)
-const featured = articles.find((article) => article.featured)
-const others = articles.filter((article) => !article.featured)
+import { useLatestNews } from '../../stores/UseLatestNewsStore'
+import { computed, onMounted } from 'vue'
+interface Category {
+  name: string
+  slug: string
+}
+interface Article {
+  id: number
+  title: string
+  slug: string
+  excerpt: string
+  published_at: string
+  thumbnail_url: string
+  video_url: null
+  categories: Category[]
+}
+const store = useLatestNews()
+onMounted(async () => {
+  await store.fetchLatestNews()
+})
+const featured = computed(() => {
+  return store.latestNews[0] ?? null
+})
+const others = computed(() => {
+  return store.latestNews.slice(1)
+})
+console.log(others.value)
+console.log(featured.value)
 </script>
 <template>
   <div class="w-full md:max-w-[1216px] mx-auto font-zalando pb-10 md:pb-[83px] md:px-0 px-6">
@@ -17,12 +40,14 @@ const others = articles.filter((article) => !article.featured)
         action="see all news"
         class="uppercase text-[#318750] text-xs md:text-sm font-semibold"
         url="/news"
-        ><div class="text-[#1F1F1F] font-medium sm:text-20px md:text-[36px] uppercase">
+      >
+        <div class="text-[#1F1F1F] font-medium sm:text-20px md:text-[36px] uppercase">
           Latest news
         </div>
         <template #icon>
-          <ArrowLongRightIcon class="text-[#318750] w-3 h-3 md:h-[18px] md:w-[18px]" /> </template
-      ></NewsPageSubHeader>
+          <ArrowLongRightIcon class="text-[#318750] w-3 h-3 md:h-[18px] md:w-[18px]" />
+        </template>
+      </NewsPageSubHeader>
     </div>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pb-6">
       <div class="lg:col-span-2">
@@ -35,7 +60,7 @@ const others = articles.filter((article) => !article.featured)
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <ArticleCard v-for="article in others.slice(1)" :key="article.id" :article="article" />
+      <ArticleCard v-for="article in others.slice(2, 6)" :key="article.id" :article="article" />
     </div>
   </div>
 </template>

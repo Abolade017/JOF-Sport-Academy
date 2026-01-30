@@ -24,7 +24,7 @@ const emit = defineEmits<{
   <div
     class="bg-[#1F1F1F] text-white font-zalando font-semi-bold text-[22px] flex justify-between items-center px-4 py-3 mb-8"
   >
-    <div class="capitalized text-sm md:text-base">{{ props.month }}</div>
+    <div class="capitalize text-sm md:text-base">{{ props.month }}</div>
     <button @click="emit('toggle')" class="cursor-pointer">
       <ChevronUpIcon
         class="h-4 w-4 text-[#FAFBFB]"

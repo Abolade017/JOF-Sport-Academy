@@ -1,21 +1,63 @@
 <script setup lang="ts">
-import DropdownFilter from '@/components/home/DropdownFilter.vue'
-import Fixtures from '@/components/Fixtures/Fixtures.vue'
-import Results from '@/components/Fixtures/Results.vue'
-import Table from '@/components/Fixtures/Table.vue'
-import { ref, computed, KeepAlive } from 'vue'
-import SubHeader from '@/components/common/SubHeader.vue'
-const options = ['JOFSA King', 'JOFSA Princes', 'JOFSA Kids', 'JOFSA Queen']
+import { ref, computed, KeepAlive, onMounted, watch, onActivated } from 'vue'
+import DropdownFilter from '../components/home/DropdownFilter.vue'
+import SubHeader from '../components/common/SubHeader.vue'
+import Fixtures from '../components/Fixtures/Fixtures.vue'
+import Results from '../components/Fixtures/Results.vue'
+import Table from '../components/Fixtures/Table.vue'
+import { useTeamNameStore } from '../stores/TeamStore'
+import { useCompetitonStore } from '../stores/useCompetitionStore'
+const store = useTeamNameStore()
+const selectedTeam = ref('Arsenal')
 const years = ['2025/2026', '2026/2027']
-const competitions = ['NPL']
 const tabs = [{ name: 'fixtures' }, { name: 'results' }, { name: 'table' }]
 const activeTab = ref('fixtures')
 const openTeam = ref(false)
 const openYear = ref(false)
 const opencompetition = ref(false)
-const selectedTeam = ref('JOFSA King')
 const selectedYear = ref('2025/2026')
-const selectedCompetition = ref('All Competition')
+const selectedCompetition = ref('Bds')
+const competitionStore = useCompetitonStore()
+onMounted(async () => {
+  await store.fetchTeam()
+  await competitionStore.fetchcompetitions()
+})
+const options = computed(() => {
+  return store.teams.map((team) => team.name)
+})
+const competitions = computed(() => {
+  return competitionStore.competitions.map((name) => name.competition)
+})
+// watch selected team options
+watch(
+  options,
+  (teams) => {
+    if (teams.length && !selectedTeam.value) {
+      selectedTeam.value = teams[0]
+    }
+  },
+  { immediate: true },
+)
+// watch selected competition
+watch(
+  competitions,
+  (list) => {
+    if (list.length && !selectedCompetition.value) {
+      selectedCompetition.value = list[0]
+    }
+  },
+  { immediate: true },
+)
+
+const filters = computed(() => {
+  return {
+    competition:
+      selectedCompetition.value !== 'bds' ? selectedCompetition.value.toLowerCase() : undefined,
+    team: selectedTeam.value ? selectedTeam.value.toLowerCase().replace(/\s+/g, '-') : undefined,
+    year: selectedYear.value ? Number(selectedYear.value.split('/')[0]) : undefined,
+  }
+})
+
 const openTeamDropdown = () => {
   openTeam.value = !openTeam.value
 }
@@ -59,8 +101,8 @@ const componentsMap: any = {
           <div
             :class="
               activeTab === item.name
-                ? 'uppercase text-[#369458] underline  decoration-4 decoration-[#369458]  underline-offset-20 text-xs md:text-sm'
-                : 'uppercase text-[#369458] text-xs md:text-sm'
+                ? 'uppercase text-[#369458] underline  decoration-4 decoration-[#369458]  underline-offset-20 text-xs md:text-sm cursor-pointer'
+                : 'uppercase text-[#8C8C8C] text-xs md:text-sm cursor-pointer'
             "
             @click="activeTab = item.name"
           >
@@ -79,7 +121,7 @@ const componentsMap: any = {
           >
             <div v-for="(i, index) in options" :key="index">
               <p
-                class="hover:bg-gray-100 cursor-pointer px-2 py-2 capitalize text-xs md:text-sm"
+                class="hover:bg-gray-100 cursor-pointer px-2 py-2 uppercase text-xs md:text-sm"
                 @click="selectTeam(i)"
               >
                 {{ i }}
@@ -119,9 +161,9 @@ const componentsMap: any = {
       </div>
     </div>
     <div class="py-6 md:py-20">
-      <KeepAlive>
-        <component :is="componentsMap[activeTab]" />
-      </KeepAlive>
+      <!-- <KeepAlive> -->
+      <component :is="componentsMap[activeTab]" :filters="filters" />
+      <!-- </KeepAlive> -->
     </div>
   </div>
 </template>

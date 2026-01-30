@@ -20,7 +20,7 @@ const scrollToTop = () => {
 }
 </script>
 <template>
-  <div class="bg-[#26693E] font-zalando">
+  <div class="bg-[#1E5130] font-zalando">
     <div class="max-w-[1250px] mx-auto py-12 md:py-24">
       <div class="flex md:flex-row flex-col space-y-6 md:justify-between px-4 md:px-0">
         <div class="flex flex-col sapce-y-3">
@@ -78,7 +78,7 @@ const scrollToTop = () => {
       </div>
     </div>
 
-    <div class="bg-[#173E25] h-fit w-full">
+    <div class="bg-[#26693E] h-fit w-full">
       <div class="max-w-[1250px] mx-auto md:px-0 px-2 py-4">
         <div
           class="flex flex-col md:space-y-0 space-y-3 md:flex-row md:justify-between items-center"

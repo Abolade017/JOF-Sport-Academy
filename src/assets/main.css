@@ -1,7 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Zalando+Sans:ital,wght@0,200..900;1,200..900&display=swap");
 @import "tailwindcss";
+@font-face {
+  font-family: "Nippo";
+  src: url("@/assets/fonts/Nippo-Bold.woff2") format("woff2");
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Zalando Sans Condensed";
+  src: url("@/assets/fonts/ZalandoSansCondensed-VariableFont_wght.woff2")
+    format("woff2");
+  font-display: swap;
+}
 @theme {
+  --font-zalando-condensed: "Zalando Sans Condensed", sans-serif;
   --font-zalando: "Zalando Sans", sans-serif;
+  --font-nippo: "Nippo", sans-serif;
   --bg-gradient: linear-gradient(270deg, #318750 42.07%, #173e25 100%);
   --fixtures-pattern: repeating-linear-gradient(
     -45deg,

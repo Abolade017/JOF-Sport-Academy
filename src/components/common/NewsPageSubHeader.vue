@@ -6,8 +6,10 @@ const props = defineProps<{
 }>()
 </script>
 <template>
-  <div class="flex space-x-2 items-center pl-0 md:pl-16">
-    <slot></slot>
+  <div class="flex md:space-x-4 space-x-2 items-center">
+    <div>
+      <slot></slot>
+    </div>
     <div class="flex space-x-1 items-center">
       <RouterLink :to="props.url" :class="props.class">{{ props.action }}</RouterLink>
       <slot name="icon"></slot>

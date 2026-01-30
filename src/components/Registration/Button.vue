@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   text: string
-  type?: 'button' | 'submit' 
+  type?: 'button' | 'submit'
   color?: 'primary' | 'secondary'
   disabled?: boolean
 }>()
@@ -15,7 +15,7 @@ const handleClick = (event: MouseEvent) => {
     :type="props.type ?? 'button'"
     @click="handleClick"
     :class="[
-      'px-4 py-2 flex w-fit h-9 text-white uppercase font-zalando text-sm font-semibold',
+      'px-4 py-2 flex w-fit h-9 text-white uppercase font-zalando text-sm font-semibold cursor-pointer',
       props.color === 'primary'
         ? 'bg-[#8C8C8C] disabled:cursor-not-allowed'
         : 'bg-[#318750] disabled:cursor-not-allowed',

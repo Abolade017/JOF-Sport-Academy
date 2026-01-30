@@ -1,61 +1,52 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { computed, onActivated, onMounted, reactive, ref, watch } from 'vue'
 import CurrentMatchScore from './fixturesTabComponents/CurrentMatchScore.vue'
 import LatestNews from '../common/LatestNews.vue'
-import { fixtures, matches } from '@/data'
 import MatchesHeader from './fixturesTabComponents/MatchesHeader.vue'
 import MatchesCard from './fixturesTabComponents/MatchesCard.vue'
-// const fixtures = reactive([
-//   {
-//     month: 'November',
-//     date: 'SUN, 05 NOV, 16:15 WAT',
-//     time: '15:00',
-//     homeTeam: 'Kwara united',
-//     awayTeam: 'JOFSA King',
-//     leagueName: 'Nigeria Premier League',
-//     LeagueLogo: '/assets/images/LeagueLogo.png',
-//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-//     awayTeamLogo: '/assets/images/AwayTeam/Logo.png',
-//     stadium: 'Moshood abiola stadium',
-//   },
-//   {
-//     month: 'December',
-//     date: 'SUN, 05 NOV, 16:15 WAT',
-//     time: '18:00',
-//     homeTeam: 'Kwara united',
-//     awayTeam: 'JOFSA King',
-//     leagueName: 'Nigeria Premier League',
-//     LeagueLogo: '/assets/images/LeagueLogo.png',
-//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-//     awayTeamLogo: '/assets/images/AwayTeam/Logo.png',
-//     stadium: 'Moshood abiola stadium',
-//   },
-//   {
-//     month: 'January',
-//     date: 'SUN, 05 NOV, 16:15 WAT',
-//     time: '18:00',
-//     homeTeam: 'Kwara united',
-//     awayTeam: 'JOFSA King',
-//     leagueName: 'Nigeria Premier League',
-//     LeagueLogo: '/assets/images/LeagueLogo.png',
-//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-//     awayTeamLogo: '/assets/images/AwayTeam/Logo.png',
-//     stadium: 'Moshood abiola stadium',
-//   },
-// ])
-const liveScores = reactive({
-  homeTeamScore: '2',
-  awayTeamScore: '1',
-  date: 'SUN, 05 NOV, 16:15 WAT',
-  time: '18:00',
-  homeTeam: 'Kwara united',
-  awayTeam: 'JOFSA King',
-  leagueName: 'Nigeria Premier League',
-  LeagueLogo: '/assets/images/LeagueLogo.png',
-  homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-  awayTeamLogo: '/assets/images/jofsa.png',
-  stadium: 'Moshood abiola stadium',
-  status: 'finished',
+import { useFixtureStore } from '../../stores/useFixturesStore'
+import { formatToWAT, formatToTime } from '../../utils/dateHelper'
+import dayjs from 'dayjs'
+const props = defineProps<{
+  filters: {
+    competition?: string
+    team?: string
+    year?: number
+  }
+}>()
+const openIndex = ref<boolean[]>([])
+
+const store = useFixtureStore()
+onMounted(async () => {
+  openIndex.value = store.fixtures.map((_, index) => index === 0)
+})
+// onActivated(() => {
+//   openIndex.value = store.fixtures.map((_, index) => index === 0)
+//   store.fetchFixtures(props.filters)
+// })
+watch(
+  () => props.filters,
+  async (newFilters) => {
+    await store.fetchFixtures(newFilters)
+  },
+  { immediate: true, deep: true },
+)
+// const liveScores = reactive({
+//   homeTeamScore: '2',
+//   awayTeamScore: '1',
+//   date: 'SUN, 05 NOV, 16:15 WAT',
+//   time: '18:00',
+//   homeTeam: 'Kwara united',
+//   awayTeam: 'JOFSA King',
+//   leagueName: 'Nigeria Premier League',
+//   LeagueLogo: '/assets/images/LeagueLogo.png',
+//   homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
+//   awayTeamLogo: '/assets/images/jofsa.png',
+//   stadium: 'Moshood abiola stadium',
+//   status: 'finished',
+// })
+const liveScores = computed(() => {
+  return store.fixtures.find((match) => match.is_played === true)
 })
 const News = reactive([
   {
@@ -67,6 +58,7 @@ const News = reactive([
     title: 'JOFSA King Signs New Sponsorship Deal with SportsBrand',
   },
 ])
+
 // const openIndex = ref(0)
 // const handleToggle = (index: number) => {
 //   if (openIndex.value === index) {
@@ -75,7 +67,19 @@ const News = reactive([
 //     openIndex.value = index
 //   }
 // }
-const openIndex = ref(fixtures.map((_, index) => index === 0))
+// const openIndex = ref(fixtures.map((_, index) => index === 0))
+const groupedFixtures = computed(() => {
+  const groups: Record<string, any[]> = {}
+  store.fixtures.forEach((match) => {
+    const month = dayjs(match.match_date).format('MMMM')
+    if (!groups[month]) groups[month] = []
+    groups[month].push(match)
+  })
+  return Object.keys(groups).map((month) => ({
+    month,
+    matches: groups[month],
+  }))
+})
 const handleToggle = (index: number) => {
   openIndex.value[index] = !openIndex.value[index]
 }
@@ -83,26 +87,39 @@ const handleToggle = (index: number) => {
 <template>
   <div class="flex flex-col space-x-0 md:flex-row md:space-x-10 px-4 md:px-0">
     <div class="w-full md:w-2/3">
-      <div v-for="(item, index) in fixtures" :key="index" class="">
-        <div>
-          <MatchesHeader
-            :month="item.month"
-            @toggle="handleToggle(index)"
-            :collapsible="!openIndex[index]"
-          />
-          <div class="flex flex-col" v-show="openIndex[index]">
-            <div v-for="(match, matchIndex) in matches" :key="matchIndex" class="pb-4">
-              <MatchesCard
-                :date="match.date"
-                :leagueName="match.leagueName"
-                :leagueLogo="match.LeagueLogo"
-                :homeTeam="match.homeTeam"
-                :homeTeamLogo="match.homeTeamLogo"
-                :time="match.time"
-                :awayTeam="match.awayTeam"
-                :awayTeamLogo="match.awayTeamLogo"
-                :stadium="match.stadium"
-              />
+      <div v-if="store.loading" class="animate-pulse bg-gray-300 h-96 w-full"></div>
+      <div v-else-if="store.error">
+        {{ store.error }}
+      </div>
+
+      <div
+        v-else-if="!store.loading && groupedFixtures.length === 0"
+        class="font-zalando flex justify-center items-center h-96"
+      >
+        Fixtures are not available
+      </div>
+      <div v-else>
+        <div v-for="(item, index) in groupedFixtures" :key="index" class="">
+          <div>
+            <MatchesHeader
+              :month="item.month"
+              @toggle="handleToggle(index)"
+              :collapsible="!openIndex[index]"
+            />
+            <div class="flex flex-col" v-show="openIndex[index]">
+              <div v-for="(match, matchIndex) in item.matches" :key="matchIndex" class="pb-4">
+                <MatchesCard
+                  :date="formatToWAT(match.match_date)"
+                  leagueName="Nigerian Premier League"
+                  leagueLogo=""
+                  :homeTeam="match.home_team.name"
+                  homeTeamLogo=""
+                  :time="formatToTime(match.match_date)"
+                  :awayTeam="match.away_team.name"
+                  :awayTeamLogo="match.away_team.logo"
+                  :stadium="match.venue"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -116,7 +133,7 @@ const handleToggle = (index: number) => {
           ADD FIXTURE TO CALENDAR
         </div>
         <div class="flex flex-col space-y-4">
-          <CurrentMatchScore
+          <!-- <CurrentMatchScore
             :homeTeamScore="liveScores.homeTeamScore"
             :awayTeamScore="liveScores.awayTeamScore"
             :date="liveScores.date"
@@ -130,7 +147,7 @@ const handleToggle = (index: number) => {
             :stadium="liveScores.stadium"
             :status="liveScores.status"
             class="bg-[#DFE2E6]"
-          />
+          /> -->
 
           <div class="text-[#1F1F1F] text-lg md:text-[28px] font-bold font-zalando pt-0 md:pt-4">
             LATEST NEWS

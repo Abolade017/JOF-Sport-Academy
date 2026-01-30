@@ -14,4 +14,13 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://site-api.alluvium.net',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''), // removes /api from the path
+      },
+    },
+  },
 })

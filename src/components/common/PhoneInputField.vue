@@ -89,7 +89,6 @@
         :id="id"
         :name="name"
         type="text"
-        :placeholder="placeholder"
         :required="required"
         :value="modelValue"
         @input="handleInput"
@@ -127,10 +126,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  label: {
-    type: String,
-    default: '',
-  },
+  // label: {
+  //   type: String,
+  //   default: '',
+  // },
   id: {
     type: String,
     required: true,
@@ -139,10 +138,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  placeholder: {
-    type: String,
-    default: 'Enter phone number',
-  },
+  // placeholder: {
+  //   type: String,
+  //   default: 'Enter phone number',
+  // },
   icon: {
     type: String,
     default: 'phone',

@@ -1,81 +1,88 @@
 <script setup lang="ts">
 import { ArrowLongRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/16/solid'
 import NextPrevButton from '../common/NextPrevButton.vue'
-import { computed, reactive, ref } from 'vue'
-import { RouterLink } from 'vue-router'
-import { matches } from '@/data'
-import MatchesCard from '../Fixtures/fixturesTabComponents/MatchesCard.vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import CurrentMatchScore from '../Fixtures/fixturesTabComponents/CurrentMatchScore.vue'
 import NewsPageSubHeader from '../common/NewsPageSubHeader.vue'
-const isActive = ref(false)
+import { useFixtureStore, Fixtures } from '../../stores/useAllFixturesStore'
+import { formatToWAT, formatToTime } from '../../utils/dateHelper'
+import dayjs from 'dayjs'
 
-const liveScores = reactive([
-  {
-    homeTeamScore: '2',
-    awayTeamScore: '1',
-    date: 'SUN, 05 NOV, 16:15 WAT',
-    time: '18:00',
-    homeTeam: 'Kwara united',
-    awayTeam: 'JOFSA King',
-    leagueName: 'Nigeria Premier League',
-    LeagueLogo: '/assets/images/LeagueLogo.png',
-    homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-    awayTeamLogo: '/assets/images/jofsa.png',
-    stadium: 'Moshood abiola stadium',
-    status: 'not started',
-  },
-  {
-    homeTeamScore: '2',
-    awayTeamScore: '1',
-    date: 'SUN, 05 NOV, 16:15 WAT',
-    time: '18:00',
-    homeTeam: 'Kwara united',
-    awayTeam: 'JOFSA King',
-    leagueName: 'Nigeria Premier League',
-    LeagueLogo: '/assets/images/LeagueLogo.png',
-    homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-    awayTeamLogo: '/assets/images/jofsa.png',
-    stadium: 'Moshood abiola stadium',
-    status: 'live',
-  },
-  {
-    homeTeamScore: '2',
-    awayTeamScore: '1',
-    date: 'SUN, 05 NOV, 16:15 WAT',
-    time: '18:00',
-    homeTeam: 'Kwara united',
-    awayTeam: 'JOFSA King',
-    leagueName: 'Nigeria Premier League',
-    LeagueLogo: '/assets/images/LeagueLogo.png',
-    homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-    awayTeamLogo: '/assets/images/jofsa.png',
-    stadium: 'Moshood abiola stadium',
-    status: 'finished',
-  },
-  {
-    homeTeamScore: '2',
-    awayTeamScore: '1',
-    date: 'SUN, 05 NOV, 16:15 WAT',
-    time: '18:00',
-    homeTeam: 'Kwara united',
-    awayTeam: 'JOFSA King',
-    leagueName: 'Nigeria Premier League',
-    LeagueLogo: '/assets/images/LeagueLogo.png',
-    homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-    awayTeamLogo: '/assets/images/jofsa.png',
-    stadium: 'Moshood abiola stadium',
-    status: 'not started',
-  },
-])
+const isActive = ref(false)
+const store = useFixtureStore()
+onMounted(async () => {
+  await store.fetchFixtures()
+})
+// const liveScores = reactive([
+//   {
+//     homeTeamScore: '2',
+//     awayTeamScore: '1',
+//     date: 'SUN, 05 NOV, 16:15 WAT',
+//     time: '18:00',
+//     homeTeam: 'Kwara united',
+//     awayTeam: 'JOFSA King',
+//     leagueName: 'Nigeria Premier League',
+//     LeagueLogo: '/assets/images/LeagueLogo.png',
+//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
+//     awayTeamLogo: '/assets/images/jofsa.png',
+//     stadium: 'Moshood abiola stadium',
+//     status: 'not started',
+//   },
+//   {
+//     homeTeamScore: '2',
+//     awayTeamScore: '1',
+//     date: 'SUN, 05 NOV, 16:15 WAT',
+//     time: '18:00',
+//     homeTeam: 'Kwara united',
+//     awayTeam: 'JOFSA King',
+//     leagueName: 'Nigeria Premier League',
+//     LeagueLogo: '/assets/images/LeagueLogo.png',
+//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
+//     awayTeamLogo: '/assets/images/jofsa.png',
+//     stadium: 'Moshood abiola stadium',
+//     status: 'live',
+//   },
+//   {
+//     homeTeamScore: '2',
+//     awayTeamScore: '1',
+//     date: 'SUN, 05 NOV, 16:15 WAT',
+//     time: '18:00',
+//     homeTeam: 'Kwara united',
+//     awayTeam: 'JOFSA King',
+//     leagueName: 'Nigeria Premier League',
+//     LeagueLogo: '/assets/images/LeagueLogo.png',
+//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
+//     awayTeamLogo: '/assets/images/jofsa.png',
+//     stadium: 'Moshood abiola stadium',
+//     status: 'finished',
+//   },
+//   {
+//     homeTeamScore: '2',
+//     awayTeamScore: '1',
+//     date: 'SUN, 05 NOV, 16:15 WAT',
+//     time: '18:00',
+//     homeTeam: 'Kwara united',
+//     awayTeam: 'JOFSA King',
+//     leagueName: 'Nigeria Premier League',
+//     LeagueLogo: '/assets/images/LeagueLogo.png',
+//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
+//     awayTeamLogo: '/assets/images/jofsa.png',
+//     stadium: 'Moshood abiola stadium',
+//     status: 'not started',
+//   },
+// ])
+const liveScores = computed(() => store.fixtures)
+console.log(liveScores)
 const startIndex = ref(0)
 const ITEMS_PER_PAGE = 3
 
-const currentFixture = computed(() => {
-  return liveScores.slice(startIndex.value, startIndex.value + ITEMS_PER_PAGE)
+const currentFixture = computed<Fixtures[]>(() => {
+  if (!liveScores.value.length) return []
+
+  return liveScores.value.slice(startIndex.value, startIndex.value + ITEMS_PER_PAGE)
 })
-// console.log(currentFixture)
 const next = () => {
-  if (startIndex.value + ITEMS_PER_PAGE < liveScores.length) {
+  if (startIndex.value + ITEMS_PER_PAGE < liveScores.value.length) {
     startIndex.value += ITEMS_PER_PAGE
   }
 }
@@ -87,7 +94,11 @@ const prev = () => {
 }
 </script>
 <template>
+  <div v-if="store.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96"></div>
+  <div v-if="store.error">{{ store.error }}</div>
+  <div v-if="!store.loading && liveScores.length === 0">Fixtures not found</div>
   <div
+    v-else
     class="striped w-full md:max-w-[1216px] mx-auto bg-green-900 font-zalando bg-no-repeat bg-cover"
   >
     <div class="flex justify-between items-center pt-8 md:pt-16 md:px-0 px-6">
@@ -96,11 +107,14 @@ const prev = () => {
         class="uppercase text-[#C1DECB] text-xs md:text-sm font-semibold"
         url="/fixtures"
       >
-        <div class="text-white font-medium sm:text-[20px] md:text-[36px] uppercase">fixtures</div>
+        <div class="text-white font-medium sm:text-[20px] md:text-[36px] uppercase pl-0 md:pl-16">
+          fixtures
+        </div>
         <template #icon>
           <ArrowLongRightIcon class="text-[#C1DECB] w-3 h-3 md:h-[18px] md:w-[18px]" />
         </template>
       </NewsPageSubHeader>
+
       <div class="flex pr-0 md:pr-16">
         <NextPrevButton :disabled="startIndex === 0" @click="prev">
           <ChevronLeftIcon
@@ -115,7 +129,7 @@ const prev = () => {
       </div>
     </div>
     <div
-      class="flex md:flex-row flex-col items-start md:items-center px-0 pt-5 pb-8 md:space-y-0 space-y-4 space-x-0 md:pt-10 md:pb-16 md:space-x-6 mx-6 md:mx-16"
+      class="flex md:flex-row flex-col px-0 pt-5 pb-8 gap-y-4 gap-x-0 md:pt-10 md:pb-16 md:gap-x-6 md:gap-y-0 mx-6 md:mx-16"
     >
       <div
         class="w-full md:w-1/3"
@@ -123,18 +137,18 @@ const prev = () => {
         :key="startIndex + index"
       >
         <CurrentMatchScore
-          :homeTeamScore="liveScore.homeTeamScore"
-          :awayTeamScore="liveScore.awayTeamScore"
-          :date="liveScore.date"
-          :time="liveScore.time"
-          :homeTeam="liveScore.homeTeam"
-          :awayTeam="liveScore.awayTeam"
-          :leagueName="liveScore.leagueName"
-          :LeagueLogo="liveScore.LeagueLogo"
-          :homeTeamLogo="liveScore.homeTeamLogo"
-          :awayTeamLogo="liveScore.awayTeamLogo"
-          :stadium="liveScore.stadium"
-          :status="liveScore.status"
+          :homeTeamScore="liveScore.home_score"
+          :awayTeamScore="liveScore.away_score"
+          :date="formatToWAT(liveScore.match_date)"
+          :time="formatToTime(liveScore.match_date)"
+          :homeTeam="liveScore.home_team.name"
+          :awayTeam="liveScore.away_team.name"
+          :homeTeamLogo="liveScore.home_team.logo"
+          :awayTeamLogo="liveScore.away_team.logo"
+          :competition="liveScore.competition"
+          :LeagueLogo="liveScore.league_logo_url"
+          :stadium="liveScore.venue"
+          :status="liveScore.is_played"
           class="bg-white border-t-4 border-t-[#78B78F]"
         />
       </div>

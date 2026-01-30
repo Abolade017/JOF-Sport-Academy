@@ -3,7 +3,7 @@ const props = defineProps<{
   title: string
 }>()
 import { reactive } from 'vue'
-const columns = reactive(['pos', 'team', 'P', 'W', 'D', 'L', 'GF', 'GA', 'GD', '+/-', 'Pts'])
+const columns = reactive(['pos', 'team', 'P', 'W', 'D', 'L', 'GF', 'GA', '+/-', 'Pts'])
 </script>
 <template>
   <div class="px-4 md:px-0 overflow-x-auto md:border-none border border-[#E1E1E1] rounded-lg">

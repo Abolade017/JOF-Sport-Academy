@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import RegistrationStep from '@/components/common/RegistrationStep.vue'
-import Button from '@/components/Registration/Button.vue'
-import FootballProfile from '@/components/Registration/FootballProfile.vue'
-import GuardianInfo from '@/components/Registration/GuardianInfo.vue'
-import PlayerInfo from '@/components/Registration/PlayerInfo.vue'
-import RequiredUploads from '@/components/Registration/RequiredUploads.vue'
+import RegistrationStep from '../components/common/RegistrationStep.vue'
+import Button from '../components/Registration/Button.vue'
+import FootballProfile from '../components/Registration/FootballProfile.vue'
+import GuardianInfo from '../components/Registration/GuardianInfo.vue'
+import PlayerInfo from '../components/Registration/PlayerInfo.vue'
+import RequiredUploads from '../components/Registration/RequiredUploads.vue'
+import Modal from '../components/common/Modal.vue'
 import { ChevronRightIcon, XMarkIcon } from '@heroicons/vue/16/solid'
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
+import router from '../router'
+import { useRegistrationStore } from '../stores/RegistrationStore'
+import { toast } from 'vue3-toastify'
+
+const store = useRegistrationStore()
 const stepRef = ref<any>(null)
 const steps = [
   { name: 'Player Information', component: 'playerInformation', stepLevel: 1 },
@@ -15,6 +21,8 @@ const steps = [
   { name: 'Required Uploads', component: 'requiredUploads', stepLevel: 4 },
 ]
 const activeStep = ref('playerInformation')
+const showSuccessModal = ref(false)
+
 const completedSteps = reactive<Record<string, boolean>>({
   playerInformation: false,
   guardianInformation: false,
@@ -27,21 +35,37 @@ const componentsMap: any = {
   footballProfile: FootballProfile,
   requiredUploads: RequiredUploads,
 }
-const nextStep = () => {
-  // const currentIndex = steps.findIndex((s) => s.component === activeStep.value)
-  // if (currentIndex < steps.length - 1) {
-  //   const nextComponent = steps[currentIndex + 1]?.component
-  //   if (nextComponent) {
-  //     activeStep.value = nextComponent
-  //   }
+const isStep4Valid = ref(false)
+const handleStepValid = (val: boolean) => {
+  completedSteps[activeStep.value] = val
+  if (activeStep.value === 'requiredUploads') isStep4Valid.value = val
+}
+const isFormValid = computed(() => {
+  return Object.values(completedSteps).every(Boolean)
+})
+const submit = async () => {
+  if (!isStep4Valid.value) return
+  // if (!isFormValid.value) return
+  // {
+  // toast('Please complete all required fields', {
+  //   autoClose: 1500,
+  // })
+  // return
   // }
-  // const keys = Object.keys(completedSteps)
-  // const currentIndex = keys.indexOf(activeStep.value)
-  // const nextKey = keys[currentIndex + 1]
+  try {
+    await store.submitFullRegistrationForm()
 
-  // if (completedSteps[activeStep.value] && nextKey) {
-  //   activeStep.value = nextKey
-  // }
+    showSuccessModal.value = true
+  } catch (error) {
+    console.error('Registration failed:', error)
+    showSuccessModal.value = false
+    toast(store.error || 'submission failed', {
+      autoClose: 1000,
+    })
+  }
+}
+
+const nextStep = () => {
   if (!stepRef.value?.validate()) return
 
   completedSteps[activeStep.value] = true
@@ -71,10 +95,10 @@ const prevStep = () => {
       <div class="font-zalando font-bold text-[#1F1F1F] text-xl md:text-[22px] uppercase">
         Register for 2025/2026 session
       </div>
-      <div class="flex items-center space-x-2">
+      <button class="flex items-center space-x-2 cursor-pointer" @click="router.push('/')">
         <XMarkIcon class="text-[#454545] h-[18px] w-[18px]" />
         <div class="text-[#454545] text-sm font-zalando font-semibold">Cancel</div>
-      </div>
+      </button>
     </div>
   </div>
 
@@ -94,28 +118,36 @@ const prevStep = () => {
             <ChevronRightIcon class="text-[#8C8C8C] h-[18px] w-[18px]" /></div
         ></RegistrationStep>
       </div>
-      <form action="">
+      <form action="" @submit.prevent="submit">
         <KeepAlive>
-          <component
-            ref="stepRef"
-            :is="componentsMap[activeStep]"
-            @step-valid="completedSteps[activeStep] = $event"
-          />
+          <component ref="stepRef" :is="componentsMap[activeStep]" @step-valid="handleStepValid" />
         </KeepAlive>
         <div class="flex space-x-4">
           <Button
+            type="button"
             text="Back"
             color="primary"
             :disabled="activeStep === steps[0]?.component"
             @click="prevStep"
           />
           <Button
+            type="submit"
+            v-if="activeStep === steps[steps.length - 1].component"
+            text="Submit"
+            color="secondary"
+            :disabled="!isStep4Valid || store.loading"
+          />
+
+          <Button
+            type="button"
             text="Continue"
             color="secondary"
             :disabled="activeStep === steps[steps.length - 1]?.component"
             @click="nextStep"
+            :class="activeStep === steps[steps.length - 1]?.component ? 'hidden' : 'inline'"
           />
         </div>
+        <div><Modal v-model="showSuccessModal" /></div>
       </form>
     </div>
   </div>

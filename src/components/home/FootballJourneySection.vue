@@ -9,7 +9,7 @@ const trainingData = reactive([
   },
   {
     image: '',
-    headlines: 'JOFSA players during JayTee Ojo Foundation early-morning training.',
+    headlines: 'U10 kids learning teamwork through fun, structured mini-games.',
   },
   {
     image: '',
@@ -17,7 +17,7 @@ const trainingData = reactive([
   },
 
   {
-    image: 'trainingBuild.png',
+    image: '/assets/images/trainingBuild.png',
     headlines: 'JOFSA players during JayTee Ojo Foundation early-morning training.',
   },
   {
@@ -51,12 +51,13 @@ const trainingData = reactive([
           text="Register for our academy "
         />
       </div>
-      <div class="overflow-x-auto">
-        <div class="flex space-x-4">
+      <div class="relative overflow-hidden">
+        <div class="flex animate-carousel whitespace-nowrap space-x-4">
+          <!-- <div class="flex space-x-4"> -->
           <div v-for="(data, index) in trainingData" :key="index">
-            <div class="flex flex-col gap-4">
-              <TrainingCard :image="data.image" :headline="data.headlines" />
-            </div>
+            <!-- <div class="flex flex-col gap-4"> -->
+            <TrainingCard :image="data.image" :headline="data.headlines" />
+            <!-- </div> -->
           </div>
         </div>
       </div>
@@ -66,3 +67,17 @@ const trainingData = reactive([
     </div>
   </div>
 </template>
+<style scoped>
+@keyframes carousel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-carousel {
+  animation: carousel 20s linear infinite;
+}
+</style>

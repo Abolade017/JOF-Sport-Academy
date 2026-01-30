@@ -22,13 +22,16 @@
     "@fortawesome/free-brands-svg-icons": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/vue-fontawesome": "^3.1.2",
+    "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
     "axios": "^1.13.2",
+    "dayjs": "^1.11.19",
     "libphonenumber-js": "^1.12.33",
     "pinia": "^3.0.4",
-    "vue": "^3.5.25",
-    "vue-router": "^4.6.3",
-    "vue-tel-num-input": "^0.1.10"
+    "vue": "^3.5.26",
+    "vue-router": "^4.6.4",
+    "vue-tel-num-input": "^0.1.10",
+    "vue3-toastify": "^0.2.8"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
@@ -36,7 +39,7 @@
     "@tsconfig/node24": "^24.0.3",
     "@types/jsdom": "^27.0.0",
     "@types/node": "^24.10.1",
-    "@vitejs/plugin-vue": "^6.0.2",
+    "@vitejs/plugin-vue": "^6.0.3",
     "@vitejs/plugin-vue-jsx": "^5.1.2",
     "@vitest/eslint-plugin": "^1.5.0",
     "@vue/eslint-config-prettier": "^10.2.0",
@@ -52,7 +55,7 @@
     "prettier": "3.6.2",
     "tailwindcss": "^4.1.17",
     "typescript": "~5.9.0",
-    "vite": "^7.2.4",
+    "vite": "^7.3.1",
     "vite-plugin-vue-devtools": "^8.0.5",
     "vitest": "^4.0.14",
     "vue-tsc": "^3.1.5"
