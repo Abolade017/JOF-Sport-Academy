@@ -55,7 +55,7 @@ const componentMap: any = {
 }
 </script>
 <template>
-  <SubHeader headerName="JOFSA QUEENS" />
+  <SubHeader :headerName="selectedTeam" />
   <div class="max-w-[1250px] mx-auto">
     <div
       class="flex flex-col space-y-8 md:flex-row md:justify-between space-x-0 md:space-x-3 items-center py-4 font-zalando mx-4 md:mx-0"

@@ -102,6 +102,51 @@ export const useRegistrationStore = defineStore('registration', {
   }),
 
   actions: {
+    resetForm() {
+      this.playerInfo = {
+        first_name: '',
+        last_name: '',
+        age_category: '',
+        gender: '',
+        nationality: '',
+        school_attended: '',
+        state_of_origin: '',
+        team: 0
+
+      },
+        this.guardianInfo = {
+          guardian_first_name: "",
+          guardian_last_name: "",
+          guardian_email: "",
+          guardian_phone_number: "",
+          guardian_country: "",
+          guardian_state: "",
+          guardian_address: "",
+
+
+        },
+        this.footballProfile = {
+          profile_preferred_positions: '',
+          profile_strong_foot: '',
+          profile_previous_team: '',
+          profile_medical_conditions: '',
+          profile_descriptions: '',
+          profile_emergency_contact_name: '',
+          profile_emergency_contact_phone_number: '',
+          profile_years_of_experience: ''
+        },
+        this.requiredUploads = {
+          uploads_consent_letter: null,
+          uploads_birth_certificate: null,
+          uploads_other_document: null,
+          consent_to_training: false,
+          confirm_information: false,
+          agree_terms: false,
+
+        }
+      this.error = null
+    },
+
     async submitFullRegistrationForm() {
       this.loading = true
       this.error = null
@@ -208,6 +253,8 @@ export const useRegistrationStore = defineStore('registration', {
           },
         }
         )
+        this.resetForm()
+
       }
       catch (err) {
         this.error = err instanceof AxiosError ? err.message : 'Submission failed'

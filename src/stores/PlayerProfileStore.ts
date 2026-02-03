@@ -5,7 +5,7 @@ import { faL } from '@fortawesome/free-solid-svg-icons';
 
 
 
-interface GuardianInfo {
+export interface GuardianInfo {
   id: number,
   first_name: string,
   last_name: string,
@@ -18,7 +18,7 @@ interface GuardianInfo {
   player: 0
 
 }
-interface FootballProfile {
+export interface FootballProfile {
   id: number,
   preferred_positions: string,
   strong_foot: string,
@@ -31,7 +31,7 @@ interface FootballProfile {
   created_at: string,
   player: 0
 }
-interface RequiredUploads {
+export interface RequiredUploads {
   id: 0,
   birth_certificate: string,
   consent_letter: string,
@@ -42,7 +42,7 @@ interface RequiredUploads {
   submitted_at: string,
   player: 0
 }
-interface PlayerProfile {
+export interface PlayerProfile {
   id: number,
   first_name: string,
   last_name: string,

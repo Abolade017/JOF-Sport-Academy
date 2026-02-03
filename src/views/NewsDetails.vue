@@ -1,11 +1,12 @@
 <template>
   <div class="">
     <NewsDetailsCard
-      :type="newsItem.type"
-      :title="newsItem.title"
-      :date="newsItem.date"
-      :imageUrl="newsItem.imageUrl"
-      :time="newsItem.time"
+      v-if="detailNews"
+      :type="categoryName"
+      :title="detailNews.title"
+      :date="formattedDate"
+      :imageUrl="detailNews.thumbnail_url"
+      :time="formatToTime(detailNews.published_at)"
       :imageCredit="newsItem.imageCredit"
     />
     <p
@@ -226,8 +227,10 @@
 </template>
 <script setup lang="ts">
 import NewsDetailsCard from '../components/News/NewsDetailsCard.vue'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useNewsDetailsStore } from '../stores/NewsDetailsStore'
+import dayjs from 'dayjs'
+import { formatToWAT, formatToTime } from '../utils/dateHelper'
 import {
   faWhatsapp,
   faFacebook,
@@ -262,6 +265,16 @@ const socialMediaLinks: { url: string; icon: any }[] = [
   // { url: '/', icon: faYoutube },
   // { url: '/', icon: faInstagram },
 ]
+const detailNews = computed(() => store.newsDetails)
+const formattedDate = computed(() => {
+  if (!detailNews.value?.published_at) return ''
+  return dayjs(detailNews.value.published_at).format('dddd D MMMM YYYY')
+})
+const categoryName = computed(() => {
+  return detailNews.value?.categories?.[0]?.name ?? ''
+})
+
+console.log(detailNews.value)
 const others = articles.filter((article) => article.category === 'interviews')
 const newsItem = ref({
   title: 'Strong record of player development and community engagement',

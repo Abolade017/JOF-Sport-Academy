@@ -36,9 +36,10 @@ export const useNewsDetailsStore = defineStore('newsDetails', {
       try {
         const response = await axiosInstance.get(`/sport/api/news/${slug}/`)
         if (response.status === 200 || response.status === 201) {
+          this.newsDetails = response.data
+
           this.loading = false
           this.error = null
-          this.newsDetails = response.data
 
           console.log(this.newsDetails)
         }

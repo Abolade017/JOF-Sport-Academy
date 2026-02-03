@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { computed, onMounted, reactive } from 'vue'
 import TrainingCard from './TrainingCard.vue'
 import RegistrationButton from '../common/RegistrationButton.vue'
+import { useCarouselNews } from '../../stores/NewsCarouselStore'
 const trainingData = reactive([
   {
     image: '',
@@ -33,6 +34,11 @@ const trainingData = reactive([
     headlines: 'JOFSA players during JayTee Ojo Foundation early-morning training.',
   },
 ])
+const store = useCarouselNews()
+onMounted(async () => {
+  return await store.fetchCarousels()
+})
+const carousels = computed(() => store.carousels)
 </script>
 <template>
   <div class="bg-[#F5F6F7] relative">
@@ -54,9 +60,13 @@ const trainingData = reactive([
       <div class="relative overflow-hidden">
         <div class="flex animate-carousel whitespace-nowrap space-x-4">
           <!-- <div class="flex space-x-4"> -->
-          <div v-for="(data, index) in trainingData" :key="index">
+          <div v-for="carousel in carousels" :key="carousel.id">
             <!-- <div class="flex flex-col gap-4"> -->
-            <TrainingCard :image="data.image" :headline="data.headlines" />
+            <TrainingCard
+              :image="carousel.image_url"
+              headline="JOFSA players during JayTee Ojo Foundation early-morning training.
+"
+            />
             <!-- </div> -->
           </div>
         </div>

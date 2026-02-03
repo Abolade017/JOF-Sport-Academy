@@ -78,7 +78,7 @@ const News = reactive([
     <div v-else-if="leagueTable.loading"><LoadingState /></div>
 
     <div class="w-full md:w-2/3">
-      <LeagueTable title="Nigerian Premier League 2025-2026">
+      <LeagueTable :title="props.filters.competition + ' ' + props.filters.year">
         <tr
           v-for="(row, index) in rankedTableRows"
           :key="index"
