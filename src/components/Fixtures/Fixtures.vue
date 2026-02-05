@@ -4,26 +4,23 @@ import CurrentMatchScore from './fixturesTabComponents/CurrentMatchScore.vue'
 import LatestNews from '../common/LatestNews.vue'
 import MatchesHeader from './fixturesTabComponents/MatchesHeader.vue'
 import MatchesCard from './fixturesTabComponents/MatchesCard.vue'
-import { useFixtureStore } from '../../stores/useFixturesStore'
+import { useUnplayedFixtureStore } from '../../stores/useUnplayedFixturesStore'
 import { formatToWAT, formatToTime } from '../../utils/dateHelper'
 import dayjs from 'dayjs'
 const props = defineProps<{
   filters: {
-    competition?: string
-    team?: string
+    competition?: string | null
+    team?: string | null
     year?: number
   }
 }>()
 const openIndex = ref<boolean[]>([])
 
-const store = useFixtureStore()
+const store = useUnplayedFixtureStore()
 onMounted(async () => {
-  openIndex.value = store.fixtures.map((_, index) => index === 0)
+  openIndex.value = await store.fixtures.map((_, index) => index === 0)
 })
-// onActivated(() => {
-//   openIndex.value = store.fixtures.map((_, index) => index === 0)
-//   store.fetchFixtures(props.filters)
-// })
+
 watch(
   () => props.filters,
   async (newFilters) => {
@@ -31,20 +28,7 @@ watch(
   },
   { immediate: true, deep: true },
 )
-// const liveScores = reactive({
-//   homeTeamScore: '2',
-//   awayTeamScore: '1',
-//   date: 'SUN, 05 NOV, 16:15 WAT',
-//   time: '18:00',
-//   homeTeam: 'Kwara united',
-//   awayTeam: 'JOFSA King',
-//   leagueName: 'Nigeria Premier League',
-//   LeagueLogo: '/assets/images/LeagueLogo.png',
-//   homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-//   awayTeamLogo: '/assets/images/jofsa.png',
-//   stadium: 'Moshood abiola stadium',
-//   status: 'finished',
-// })
+
 const liveScores = computed(() => {
   return store.fixtures.find((match) => match.is_played === true)
 })
@@ -59,15 +43,6 @@ const News = reactive([
   },
 ])
 
-// const openIndex = ref(0)
-// const handleToggle = (index: number) => {
-//   if (openIndex.value === index) {
-//     openIndex.value = -1
-//   } else {
-//     openIndex.value = index
-//   }
-// }
-// const openIndex = ref(fixtures.map((_, index) => index === 0))
 const groupedFixtures = computed(() => {
   const groups: Record<string, any[]> = {}
   store.fixtures.forEach((match) => {

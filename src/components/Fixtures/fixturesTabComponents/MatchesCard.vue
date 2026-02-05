@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const props = defineProps<{
-  date: string
-  leagueName: string
-  leagueLogo: string
-  homeTeam: string
-  homeTeamLogo: string
-  time: string
-  awayTeam: string
-  awayTeamLogo: string
-  stadium: string
+  date: string | null
+  leagueName: string | null
+  leagueLogo: string | null
+  homeTeam: string | null
+  homeTeamLogo: string | null
+  time: string | null
+  awayTeam: string | null
+  awayTeamLogo: string | null
+  stadium: string | null
 }>()
 </script>
 <template>

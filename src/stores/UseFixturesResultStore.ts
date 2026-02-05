@@ -3,25 +3,25 @@ import axiosInstance from "@/api/axiosInstance";
 import { AxiosError } from "axios";
 import { ref } from "vue";
 interface Team {
-  "id": 0,
-  "name": "string",
-  "logo": "string"
+  id: 0,
+  name: string | null,
+  logo: string | null
 }
 interface Result {
-  "id": number,
-  "home_score": number,
-  "away_score": number,
-  "fixture": number
+  id: number,
+  home_score: number,
+  away_score: number,
+  fixture: number
 }
 interface FixtureResults {
-  "id": 0,
-  "home_team": Team,
-  "away_team": Team,
-  "match_date": "2026-01-20T16:11:59.560Z",
-  "venue": "string",
-  "competition": "string",
-  "is_played": true,
-  "result": Result
+  id: 0,
+  home_team: Team,
+  away_team: Team,
+  match_date: string | null,
+  venue: string | null,
+  competition: string | null,
+  is_played: boolean,
+  result: Result
 }
 export const useFixtureResults = defineStore('fixtureResults', () => {
   // state
@@ -31,8 +31,8 @@ export const useFixtureResults = defineStore('fixtureResults', () => {
 
   // actions
   const fetchFixtureResults = async (filters: {
-    competition?: string
-    team?: string
+    competition?: string | null
+    team?: string | null
     year?: number
   }) => {
     loading.value = true

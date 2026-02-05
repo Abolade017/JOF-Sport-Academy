@@ -8,8 +8,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
-import { faWhatsapp, faFacebook, faInstagram, faGithub, faTiktok, faYoutube, faXTwitter } from '@fortawesome/free-brands-svg-icons'
-library.add(faWhatsapp, faFacebook, faInstagram, faGithub, faTiktok, faYoutube, faXTwitter)
+import { faWhatsapp, faFacebook, faInstagram, faGithub, faTiktok, faYoutube, faXTwitter, faLinkedin, faTwitter, faFacebookF } from '@fortawesome/free-brands-svg-icons'
+library.add(faWhatsapp, faFacebook, faFacebookF, faInstagram, faGithub, faTiktok, faYoutube, faXTwitter, faLinkedin, faTwitter)
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
 app.use(createPinia())

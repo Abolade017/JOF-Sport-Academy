@@ -56,7 +56,7 @@ const title = computed(() => props.article.title)
           {{ title }}
         </div>
 
-        <div class="text-sm md:text-base text-[#595959] font-normal">
+        <div class="text-sm md:text-base text-[#595959] font-normal line-clamp-2">
           {{ description }}
         </div>
 

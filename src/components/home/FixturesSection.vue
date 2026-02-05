@@ -8,69 +8,11 @@ import { useFixtureStore, Fixtures } from '../../stores/useAllFixturesStore'
 import { formatToWAT, formatToTime } from '../../utils/dateHelper'
 import dayjs from 'dayjs'
 
-const isActive = ref(false)
 const store = useFixtureStore()
 onMounted(async () => {
   await store.fetchFixtures()
 })
-// const liveScores = reactive([
-//   {
-//     homeTeamScore: '2',
-//     awayTeamScore: '1',
-//     date: 'SUN, 05 NOV, 16:15 WAT',
-//     time: '18:00',
-//     homeTeam: 'Kwara united',
-//     awayTeam: 'JOFSA King',
-//     leagueName: 'Nigeria Premier League',
-//     LeagueLogo: '/assets/images/LeagueLogo.png',
-//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-//     awayTeamLogo: '/assets/images/jofsa.png',
-//     stadium: 'Moshood abiola stadium',
-//     status: 'not started',
-//   },
-//   {
-//     homeTeamScore: '2',
-//     awayTeamScore: '1',
-//     date: 'SUN, 05 NOV, 16:15 WAT',
-//     time: '18:00',
-//     homeTeam: 'Kwara united',
-//     awayTeam: 'JOFSA King',
-//     leagueName: 'Nigeria Premier League',
-//     LeagueLogo: '/assets/images/LeagueLogo.png',
-//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-//     awayTeamLogo: '/assets/images/jofsa.png',
-//     stadium: 'Moshood abiola stadium',
-//     status: 'live',
-//   },
-//   {
-//     homeTeamScore: '2',
-//     awayTeamScore: '1',
-//     date: 'SUN, 05 NOV, 16:15 WAT',
-//     time: '18:00',
-//     homeTeam: 'Kwara united',
-//     awayTeam: 'JOFSA King',
-//     leagueName: 'Nigeria Premier League',
-//     LeagueLogo: '/assets/images/LeagueLogo.png',
-//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-//     awayTeamLogo: '/assets/images/jofsa.png',
-//     stadium: 'Moshood abiola stadium',
-//     status: 'finished',
-//   },
-//   {
-//     homeTeamScore: '2',
-//     awayTeamScore: '1',
-//     date: 'SUN, 05 NOV, 16:15 WAT',
-//     time: '18:00',
-//     homeTeam: 'Kwara united',
-//     awayTeam: 'JOFSA King',
-//     leagueName: 'Nigeria Premier League',
-//     LeagueLogo: '/assets/images/LeagueLogo.png',
-//     homeTeamLogo: '/assets/images/HomeTeam/Logo.png',
-//     awayTeamLogo: '/assets/images/jofsa.png',
-//     stadium: 'Moshood abiola stadium',
-//     status: 'not started',
-//   },
-// ])
+
 const liveScores = computed(() => store.fixtures)
 console.log(liveScores)
 const startIndex = ref(0)

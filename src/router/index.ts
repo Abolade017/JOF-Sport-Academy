@@ -7,6 +7,8 @@ import Teams from '@/views/Teams.vue'
 import PlayerProfile from '@/views/PlayerProfile.vue'
 import NewsView from '@/views/NewsView.vue'
 import NewsDetails from '@/views/NewsDetails.vue'
+import ContactUs from '@/views/ContactUs.vue'
+import TheAcademy from '@/views/TheAcademy.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
@@ -27,6 +29,8 @@ const router = createRouter({
       path: '/teams/:id', name: 'player-profile', component: PlayerProfile, props: true, meta: { breadcrumb: 'Profile' }
     },
     { path: '/registration', name: 'registration', component: RegistrationView },
+    { path: '/contact-us', name: 'contact-us', component: ContactUs },
+    { path: '/the-academy', name: 'the-academy', component: TheAcademy }
 
   ],
 })

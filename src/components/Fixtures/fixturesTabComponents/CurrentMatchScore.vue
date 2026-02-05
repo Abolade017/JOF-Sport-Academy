@@ -3,15 +3,15 @@ const props = defineProps<{
   class: string
   homeTeamScore: number | null
   awayTeamScore: number | null
-  date: string
-  time: string
-  homeTeam: string
-  awayTeam: string
-  competition: string
-  LeagueLogo: string
-  homeTeamLogo: string
-  awayTeamLogo: string
-  stadium: string
+  date: string | null
+  time: string | null
+  homeTeam: string | null
+  awayTeam: string | null
+  competition: string | null
+  LeagueLogo: string | null
+  homeTeamLogo: string | null
+  awayTeamLogo: string | null
+  stadium: string | null
   status: boolean
 }>()
 </script>

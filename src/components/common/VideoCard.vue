@@ -10,8 +10,10 @@ const togglePlay = () => {
 
   if (isPlaying.value) {
     videoRef.value.pause()
+    console.log('pause')
   } else {
     videoRef.value.play()
+    console.log('play')
   }
 
   isPlaying.value = !isPlaying.value
@@ -21,7 +23,7 @@ const togglePlay = () => {
 
 <template>
   <div class="relative font-zalando">
-    <video ref="videoRef" :src="props.url" class="object-cover h-[479px] md:w-[256px] w-full" />
+    <video ref="videoRef" :src="props.url" class="object-cover h-[479px] w-full md:w-[286px]" />
     <div className="absolute p-6 top-2 ">
       <button
         @click="togglePlay"

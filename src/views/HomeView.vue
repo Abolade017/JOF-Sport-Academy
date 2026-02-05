@@ -21,5 +21,5 @@ import FootballJourneySection from '../components/home/FootballJourneySection.vu
   <LatestVideoSection />
   <AffiliatedSection />
   <OurPartners />
-  <FootballJourneySection />
+  <!-- <FootballJourneySection /> -->
 </template>

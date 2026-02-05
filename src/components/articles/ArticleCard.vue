@@ -49,9 +49,11 @@ const categoryName = computed(() => {
       </div>
       <div class="mt-2">
         <div class="text-[18px] text-[#262626] font-semibold">{{ article.title }}</div>
-        <div class="text-base text-[#595959] font-normal mt-2">{{ article.excerpt }}</div>
+        <div class="text-base text-[#595959] font-normal mt-2 line-clamp-2">
+          {{ article.excerpt }}
+        </div>
       </div>
-      <div class="mt-12 md:mt-[124px] mb-8 text-[12px] text-[#595959]">
+      <div class="mt-12 md:mt-10 mb-8 text-[12px] text-[#595959]">
         {{ dayjs(article.published_at).fromNow() }}
       </div>
     </div>

@@ -8,7 +8,7 @@ const props = defineProps<{ player: PlayerProfile | null }>()
       statistics
     </div>
     <div class="pt-6 flex md:flex-row flex-col md:gap-x-24 gap-x-0 md:gap-y-0 gap-y-4">
-      <div class="flex flex-col gap-2 w-[325.5px]">
+      <div class="flex flex-col gap-2 w-full md:w-[325.5px]">
         <div class="uppercase font-zalando-condensed text-[#1F1F1F] font-bold text-lg">attack</div>
         <table class="font-zalando text-[13px] text-[#595959] border-separate border-spacing-y-4">
           <tbody class="">
@@ -46,7 +46,7 @@ const props = defineProps<{ player: PlayerProfile | null }>()
           <div class="flex space-x-"></div> -->
         <!-- </div> -->
       </div>
-      <div class="flex flex-col gap-2 w-[325.5px]">
+      <div class="flex flex-col gap-2 w-full md:w-[325.5px]">
         <div class="uppercase font-zalando-condensed text-[#1F1F1F] font-bold text-lg">
           distribution
         </div>

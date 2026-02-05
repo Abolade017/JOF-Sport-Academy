@@ -100,8 +100,8 @@ const links = [
   { name: 'Fixtures & results', to: '/fixtures' },
   { name: 'Teams', to: '/teams' },
   { name: 'videos', to: '/contact' },
-  { name: 'The Academy', to: '/contact' },
-  { name: 'Contact us', to: '/contact' },
+  { name: 'The Academy', to: '/the-academy' },
+  { name: 'Contact us', to: '/contact-us' },
 ]
 const headers = [
   { name: 'About the academy', url: '/' },

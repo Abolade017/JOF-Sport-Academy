@@ -126,10 +126,10 @@ const playPause = (index: number, isPlaying: boolean) => {
         <div v-for="(video, index) in videos" :key="index" class="relative w-full">
           <OverLayImage
             type="video"
-            :text="`Free medical care and academic scholarships`"
             :time="dayjs(video.published_at).fromNow()"
-            :image-url="video.thumbnail_url"
+            :videoUrl="video.video_url"
             :title="video.title"
+            @play-pause="(state) => playPause(index, state)"
           />
         </div>
       </div>

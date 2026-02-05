@@ -13,7 +13,7 @@ interface Videos {
   excerpt: string
   published_at: string
   thumbnail_url: string
-  video_url: string
+  video_url: string | null
   categories: Category[]
 }
 

@@ -36,7 +36,9 @@
     <div
       class="flex justify-center font-extralight text-[#262626] font-zalando text-sm md:text-[20px] px-4 md:px-0 md:mt-10 mt-4"
     >
-      <div>
+      <div v-html="newsItem.content"></div>
+
+      <!-- <div>
         <p>
           Lorem ipsum dolor sit amet consectetur. Elementum enim nisl lacus arcu duis nec posuere
           scelerisque. Mattis a fermentum tincidunt auctor. Quis pretium quis id nunc laoreet
@@ -70,7 +72,7 @@
             </div></span
           >
         </p>
-      </div>
+      </div> -->
     </div>
   </div>
   <div class="mx-0 md:mx-[130px] my-8 md:my-16">

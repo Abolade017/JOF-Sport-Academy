@@ -7,8 +7,8 @@ import { useLeaguetableStore } from '../../stores/UseLeagueTable'
 import LoadingState from '../common/loadingState.vue'
 const props = defineProps<{
   filters: {
-    competition?: string
-    team?: string
+    competition?: string | null
+    team?: string | null
     year?: number
   }
 }>()
