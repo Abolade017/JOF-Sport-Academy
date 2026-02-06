@@ -8,14 +8,14 @@ import Table from '../components/Fixtures/Table.vue'
 import { useTeamNameStore } from '../stores/TeamStore'
 import { useCompetitonStore } from '../stores/useCompetitionStore'
 const store = useTeamNameStore()
-const selectedTeam = ref('Arsenal')
+const selectedTeam = ref('Team Strikers')
 const years = ['2025/2026', '2026/2027']
 const tabs = [{ name: 'fixtures' }, { name: 'results' }, { name: 'table' }]
 const activeTab = ref('fixtures')
 const openTeam = ref(false)
 const openYear = ref(false)
 const opencompetition = ref(false)
-const selectedYear = ref('2025/2026')
+const selectedYear = ref('2026/2027')
 const selectedCompetition = ref('Bds')
 const competitionStore = useCompetitonStore()
 onMounted(async () => {
@@ -51,9 +51,8 @@ watch(
 
 const filters = computed(() => {
   return {
-    competition:
-      selectedCompetition.value !== 'bds' ? selectedCompetition.value.toLowerCase() : undefined,
-    team: selectedTeam.value ? selectedTeam.value.toLowerCase().replace(/\s+/g, '-') : undefined,
+    competition: selectedCompetition.value ? selectedCompetition.value.toLowerCase() : undefined,
+    team: selectedTeam.value ? selectedTeam.value.toLowerCase() : undefined,
     year: selectedYear.value ? Number(selectedYear.value.split('/')[0]) : undefined,
   }
 })

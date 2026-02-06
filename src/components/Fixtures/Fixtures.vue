@@ -100,8 +100,8 @@ const handleToggle = (index: number) => {
               <div v-for="(match, matchIndex) in item.matches" :key="matchIndex" class="pb-4">
                 <MatchesCard
                   :date="formatToWAT(match.match_date)"
-                  leagueName="Nigerian Premier League"
-                  leagueLogo=""
+                  :leagueName="match.competition"
+                  :leagueLogo="match.league_logo_url"
                   :homeTeam="match.home_team.name"
                   homeTeamLogo=""
                   :time="formatToTime(match.match_date)"
