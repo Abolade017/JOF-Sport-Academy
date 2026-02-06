@@ -6,6 +6,7 @@ import MatchesHeader from './fixturesTabComponents/MatchesHeader.vue'
 import MatchesCard from './fixturesTabComponents/MatchesCard.vue'
 import { useUnplayedFixtureStore } from '../../stores/useUnplayedFixturesStore'
 import { formatToWAT, formatToTime } from '../../utils/dateHelper'
+import { useLatestNews } from '../../stores/UseLatestNewsStore'
 import dayjs from 'dayjs'
 const props = defineProps<{
   filters: {
@@ -14,10 +15,12 @@ const props = defineProps<{
     year?: number
   }
 }>()
+const newsStore = useLatestNews()
 const openIndex = ref<boolean[]>([])
 
 const store = useUnplayedFixtureStore()
 onMounted(async () => {
+  await newsStore.fetchLatestNews()
   openIndex.value = await store.fixtures.map((_, index) => index === 0)
 })
 
@@ -29,20 +32,32 @@ watch(
   { immediate: true, deep: true },
 )
 
+// const liveScores = computed(() => {
+//   return store.fixtures.find((match) => match.is_played === true)
+// })
 const liveScores = computed(() => {
-  return store.fixtures.find((match) => match.is_played === true)
-})
-const News = reactive([
-  {
-    image: '/assets/images/News/newsB.png',
-    title: 'JOFSA King Launches Youth Academy to Nurture Future Talent',
-  },
-  {
-    image: '/assets/images/News/newsA.png',
-    title: 'JOFSA King Signs New Sponsorship Deal with SportsBrand',
-  },
-])
+  const now = dayjs()
 
+  return (
+    store.fixtures.find((match) => {
+      const kickoff = dayjs(match.match_date)
+
+      // match is live if now is between kickoff and kickoff + 120 minutes
+      return now.isAfter(kickoff) && now.isBefore(kickoff.add(120, 'minute'))
+    }) || null
+  )
+})
+// const News = reactive([
+//   {
+//     image: '/assets/images/News/newsB.png',
+//     title: 'JOFSA King Launches Youth Academy to Nurture Future Talent',
+//   },
+//   {
+//     image: '/assets/images/News/newsA.png',
+//     title: 'JOFSA King Signs New Sponsorship Deal with SportsBrand',
+//   },
+// ])
+const News = computed(() => newsStore.latestNews)
 const groupedFixtures = computed(() => {
   const groups: Record<string, any[]> = {}
   store.fixtures.forEach((match) => {
@@ -108,28 +123,29 @@ const handleToggle = (index: number) => {
           ADD FIXTURE TO CALENDAR
         </div>
         <div class="flex flex-col space-y-4">
-          <!-- <CurrentMatchScore
-            :homeTeamScore="liveScores.homeTeamScore"
-            :awayTeamScore="liveScores.awayTeamScore"
-            :date="liveScores.date"
-            :time="liveScores.time"
-            :homeTeam="liveScores.homeTeam"
-            :awayTeam="liveScores.awayTeam"
-            :leagueName="liveScores.leagueName"
-            :LeagueLogo="liveScores.LeagueLogo"
-            :homeTeamLogo="liveScores.homeTeamLogo"
-            :awayTeamLogo="liveScores.awayTeamLogo"
-            :stadium="liveScores.stadium"
-            :status="liveScores.status"
+          <CurrentMatchScore
+            v-if="liveScores"
+            :homeTeamScore="liveScores.home_score"
+            :awayTeamScore="liveScores.away_score"
+            :date="formatToWAT(liveScores.match_date)"
+            :time="formatToTime(liveScores.match_date)"
+            :homeTeam="liveScores.home_team.name"
+            :awayTeam="liveScores.away_team.name"
+            :competition="liveScores.competition"
+            :LeagueLogo="liveScores.league_logo_url ?? ''"
+            :homeTeamLogo="liveScores.home_team.logo ?? ''"
+            :awayTeamLogo="liveScores.away_team.logo ?? ''"
+            :stadium="liveScores.venue"
+            :status="liveScores.is_played"
             class="bg-[#DFE2E6]"
-          /> -->
+          />
 
           <div class="text-[#1F1F1F] text-lg md:text-[28px] font-bold font-zalando pt-0 md:pt-4">
             LATEST NEWS
           </div>
           <div class="flex flex-col space-y-4">
-            <div v-for="(post, index) in News" :key="index">
-              <LatestNews :image="post.image" :title="post.title" />
+            <div v-for="(post, index) in News.slice(0, 2)" :key="index">
+              <LatestNews :image="post.thumbnail_url" :title="post.title" />
             </div>
           </div>
         </div>

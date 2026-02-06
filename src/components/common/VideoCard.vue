@@ -1,7 +1,12 @@
 <script setup lang="ts">
 import { PauseIcon, PlayIcon } from '@heroicons/vue/16/solid'
 import { ref } from 'vue'
-const props = defineProps<{ url: string; time: string; title: string; type: string }>()
+const props = defineProps<{
+  url?: string
+  time: string
+  title: string
+  type: string
+}>()
 const emit = defineEmits<{ (e: 'playPause', value: boolean): void }>()
 const videoRef = ref<HTMLVideoElement | null>(null)
 const isPlaying = ref(false)

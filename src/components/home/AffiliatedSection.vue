@@ -1,8 +1,33 @@
 <script setup lang="ts">
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/16/solid'
 import NextPrevButton from '../common/NextPrevButton.vue'
-import { computed, reactive, ref } from 'vue'
+import { computed, onMounted, reactive, ref } from 'vue'
 import AchievementNewsCard from './AchievementNewsCard.vue'
+import { useLatestNews } from '../../stores/UseLatestNewsStore'
+interface Category {
+  name: string
+  slug: string
+}
+interface Article {
+  id: number
+  title: string
+  slug: string
+  excerpt: string
+  published_at: string
+  thumbnail_url: string
+  video_url: null
+  categories: Category[]
+}
+const store = useLatestNews()
+onMounted(async () => {
+  await store.fetchLatestNews()
+})
+const filteredNews = computed(() => {
+  return store.latestNews.filter((article) =>
+    article.categories.some((news) => news.slug === 'achievement'),
+  )
+})
+console.log(filteredNews.value)
 const affiliates = reactive([
   {
     title: 'latest news',
@@ -33,7 +58,7 @@ const affiliates = reactive([
 const startIndex = ref(0)
 const ITEMS_PER_PAGE = 3
 const currentAffiliate = computed(() => {
-  return affiliates.slice(startIndex.value, startIndex.value + ITEMS_PER_PAGE)
+  return filteredNews.value.slice(startIndex.value, startIndex.value + ITEMS_PER_PAGE)
 })
 const next = () => {
   if (startIndex.value + ITEMS_PER_PAGE < affiliates.length) {
@@ -49,7 +74,7 @@ const prev = () => {
 </script>
 
 <template>
-  <div class="bg-[url('/assets/images/field.png')] h-[743px] bg-no-repeat bg-cover">
+  <div class="bg-[url('/assets/images/field.png')] h-fit bg-no-repeat bg-cover">
     <div class="flex flex-col space-y-2 mx-auto md:max-w-[1216px]">
       <div class="flex justify-between items-center mt-[120px] md:mt-[423px] md:px-0 px-6">
         <div
@@ -67,7 +92,7 @@ const prev = () => {
               />
             </NextPrevButton>
             <NextPrevButton
-              :disabled="startIndex + ITEMS_PER_PAGE >= affiliates.length"
+              :disabled="startIndex + ITEMS_PER_PAGE >= filteredNews.length"
               @click="next"
             >
               <ChevronRightIcon
@@ -78,8 +103,8 @@ const prev = () => {
         </div>
       </div>
       <div class="flex md:flex-row flex-col md:gap-o gap-y-4 mt-8 pb-14 md:px-0 px-6">
-        <div v-for="(i, index) in currentAffiliate" :key="startIndex + index" class="">
-          <AchievementNewsCard :title="i.title" :description="i.description" :image="i.image" />
+        <div v-for="(i, index) in filteredNews" :key="startIndex + index" class="">
+          <AchievementNewsCard :title="i.title" :image="i.thumbnail_url" />
         </div>
       </div>
     </div>

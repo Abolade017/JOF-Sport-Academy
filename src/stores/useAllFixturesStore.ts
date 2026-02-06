@@ -11,8 +11,8 @@ interface Team {
 export interface Fixtures {
   id: 0,
   home_team: Team,
-  home_score: null | number,
-  away_score: null | number,
+  home_score: null | string,
+  away_score: null | string,
   away_team: Team,
   match_date: string,
   league_logo_url: string | null

@@ -66,8 +66,8 @@ const selectedTab = ref(tabs[0])
           </div>
         </div>
       </div>
-      <div class="flex">
-        <div class="w-1/3 bg-[#F0F0F0] h-auto">
+      <div class="flex flex-col md:flex-row">
+        <div class="w-full md:w-1/3 bg-[#F0F0F0] h-auto">
           <div
             class="flex flex-col gap-4 border-b border-[#D9D9D9] text-[#1F1F1F] font-bold uppercase text-lg md:text-[24px] pl-4 md:pl-6 py-4 md:py-6"
           >
@@ -85,7 +85,7 @@ const selectedTab = ref(tabs[0])
             </div>
           </div>
         </div>
-        <div class="w-2/3">
+        <div class="w-full md:w-2/3">
           <!-- <KeepAlive> -->
           <component
             :is="componentsMap[selectedTab.component]"

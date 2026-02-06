@@ -1,16 +1,16 @@
 <script setup lang="ts">
 const props = defineProps<{
   class: string
-  homeTeamScore: number | null
-  awayTeamScore: number | null
+  homeTeamScore: string | null
+  awayTeamScore: string | null
   date: string | null
-  time: string | null
+  time: string
   homeTeam: string | null
   awayTeam: string | null
   competition: string | null
-  LeagueLogo: string | null
-  homeTeamLogo: string | null
-  awayTeamLogo: string | null
+  LeagueLogo: string
+  homeTeamLogo: string
+  awayTeamLogo: string
   stadium: string | null
   status: boolean
 }>()
@@ -20,10 +20,8 @@ const props = defineProps<{
     <div class="flex justify-between items-center p-6">
       <div class="flex flex-col space-y-1">
         <div class="uppercase font-bold text-[#262626] text-sm">{{ props.date }}</div>
-        <!-- <div class="uppercase text-xs font-normal text-[#595959]">{{ props.leagueName }}</div> -->
         <div class="uppercase text-xs font-normal text-[#595959]">{{ competition }}</div>
       </div>
-      <!-- <div><img :src="props.LeagueLogo" alt="League Logo" /></div> -->
       <div><img :src="props.LeagueLogo" alt="League Logo" class="h-16 w-16" /></div>
     </div>
     <div class="flex justify-between items-center px-[45.5px] pt-10 md:pt-20 h-fit">

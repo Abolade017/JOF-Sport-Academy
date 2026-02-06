@@ -24,11 +24,16 @@ const store = useLatestNews()
 onMounted(async () => {
   await store.fetchLatestNews()
 })
+const filteredNews = computed(() => {
+  return store.latestNews.filter((article) =>
+    article.categories.some((news) => news.name === 'news' || news.name === 'interview'),
+  )
+})
 const featured = computed(() => {
   return store.latestNews[0] ?? null
 })
 const others = computed(() => {
-  return store.latestNews.slice(1)
+  return filteredNews.value
 })
 console.log(others.value)
 console.log(featured.value)
@@ -54,13 +59,14 @@ console.log(featured.value)
         <FeaturedArticleCard v-if="featured" :article="featured" />
       </div>
 
-      <div class="space-y-8">
-        <ArticleCard v-for="article in others.slice(0, 1)" :key="article.id" :article="article" />
+      <div class="col-span-1">
+        <ArticleCard v-if="others.length > 0" :article="others[0]" />
       </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <ArticleCard v-for="article in others.slice(2, 6)" :key="article.id" :article="article" />
+      <div v-for="(article, index) in others.slice(1)" :key="article.id" class="col-span-1">
+        <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"> -->
+        <!-- <ArticleCard v-for="article in others.slice(2, 6)" :key="article.id" :article="article" /> -->
+        <ArticleCard :article="article" />
+      </div>
     </div>
   </div>
 </template>
