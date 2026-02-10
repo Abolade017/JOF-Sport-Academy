@@ -8,12 +8,12 @@
           <article
             v-for="team in teams"
             :key="team.title"
-            class="relative overflow-hidden rounded-lg border border-[#11182f] bg-[#0a122b]"
+            class="group relative overflow-hidden rounded-lg border border-[#11182f] bg-[#0a122b]"
           >
             <img
               :src="team.image"
               :alt="team.title"
-              class="h-[340px] w-full object-cover"
+              class="h-[340px] w-full object-cover transform transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-110"
               loading="lazy"
             />
 
@@ -31,12 +31,12 @@
           <article
             v-for="team in teams1"
             :key="team.title"
-            class="relative overflow-hidden rounded-lg border border-[#11182f] bg-[#0a122b]"
+            class="group relative overflow-hidden rounded-lg border border-[#11182f] bg-[#0a122b]"
           >
             <img
               :src="team.image"
               :alt="team.title"
-              class="h-[340px] w-full object-cover"
+              class="h-[340px] w-full object-cover transform transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-110"
               loading="lazy"
             />
 

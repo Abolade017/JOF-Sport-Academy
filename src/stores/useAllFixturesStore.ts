@@ -15,8 +15,8 @@ export interface Fixtures {
   away_score: null | string,
   away_team: Team,
   match_date: string,
-  league_logo_url: string | null
-  league_logo: string | null
+  league_logo_url: string
+  league_logo: string
   venue: string,
   competition: string,
   is_played: boolean

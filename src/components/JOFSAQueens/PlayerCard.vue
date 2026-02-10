@@ -33,19 +33,22 @@ const gotoPlayerProfile = (id: number) => {
           </div>
         </div>
       </div>
-      <div class="p-2 md:pt-6 md:pb-4 md:px-4">
-        <div class="text-[#BFBFBF] text-sm md:text-[18px] font-semibold uppercase">
+      <div class="p-2 md:pt-6 md:pb-4 md:px-4 group hover:bg-black transition-all duration-300">
+        <div
+          class="text-[#BFBFBF] group-hover:text-[#BFBFBF] transition-all duration-300 text-sm md:text-[18px] font-semibold uppercase"
+        >
           {{ props.firstName }} <br />
-          <span class="text-[#1F1F1F] text-base md:text-[28px] font-bold leading-2">{{
-            props.lastName
-          }}</span>
+          <span
+            class="group-hover:text-white text-[#1F1F1F] text-base md:text-[28px] font-bold leading-2"
+            >{{ props.lastName }}</span
+          >
         </div>
         <button
-          class="outline-none cursor-pointer text-[#369458] font-semibold text-xs md:text-[13px] flex items-center space-x-2 uppercase mt-4"
+          class="outline-none cursor-pointer text-[#369458] group-hover:text-white font-semibold text-xs md:text-[13px] flex items-center space-x-2 uppercase mt-4"
           @click="gotoPlayerProfile(props.id)"
         >
           <div>view profile</div>
-          <ChevronRightIcon class="text-[#369458] h-[18px] w-[18px]" />
+          <ChevronRightIcon class="text-[#369458] group-hover:text-white h-[18px] w-[18px]" />
         </button>
       </div>
     </div>
