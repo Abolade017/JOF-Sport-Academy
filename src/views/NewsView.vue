@@ -30,26 +30,26 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import QueensNews from '../components/News/QueensNews.vue'
-import KingsNews from '../components/News/KingsNews.vue'
-import KidsNews from '../components/News/KidsNews.vue'
-import PrincesNews from '../components/News/PrincesNews.vue'
+// import QueensNews from '../components/News/QueensNews.vue'
+// import KingsNews from '../components/News/KingsNews.vue'
+// import KidsNews from '../components/News/KidsNews.vue'
+// import PrincesNews from '../components/News/PrincesNews.vue'
 import LatestNews from '../components/News/LatestNews.vue'
 
 const tabs = [
   { name: 'Latest', component: 'LatestNews' },
-  { name: 'Queens', component: 'QueensNews' },
-  { name: 'Kings', component: 'KingsNews' },
-  { name: 'Kids', component: 'KidsNews' },
-  { name: 'Princes', component: 'PrincesNews' },
+  // { name: 'Queens', component: 'QueensNews' },
+  // { name: 'Kings', component: 'KingsNews' },
+  // { name: 'Kids', component: 'KidsNews' },
+  // { name: 'Princes', component: 'PrincesNews' },
 ]
 
 const selectedTab = ref(tabs[0].component)
 const componentsMap: any = {
   LatestNews,
-  QueensNews,
-  KingsNews,
-  KidsNews,
-  PrincesNews,
+  // QueensNews,
+  // KingsNews,
+  // KidsNews,
+  // PrincesNews,
 }
 </script>

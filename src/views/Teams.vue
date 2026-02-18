@@ -4,12 +4,16 @@ import DropdownFilter from '../components/home/DropdownFilter.vue'
 import SubHeader from '../components/common/SubHeader.vue'
 import Players from '../components/JOFSAQueens/Players.vue'
 import Table from '../components/JOFSAQueens/Table.vue'
-import Stats from '../components/JOFSAQueens/Stats.vue'
-import Achievements from '../components/JOFSAQueens/Achievements.vue'
+// import Stats from '../components/JOFSAQueens/Stats.vue'
+// import Achievements from '../components/JOFSAQueens/Achievements.vue'
 import { useTeamStore } from '../stores/useTeamStore'
 import { useTeamNameStore } from '../stores/TeamStore'
 import { useLeaguetableStore } from '../stores/UseLeagueTable'
-const tabs = [{ name: 'players' }, { name: 'table' }, { name: 'stats' }, { name: 'achievements' }]
+const tabs = [
+  { name: 'players' },
+  { name: 'table' },
+  // { name: 'stats' }, { name: 'achievements' }
+]
 const activeTab = ref('players')
 const openDropdown = ref(false)
 const team = ref('Arsenal')
@@ -50,8 +54,8 @@ const filters = computed(() => {
 const componentMap: any = {
   players: Players,
   table: Table,
-  stats: Stats,
-  achievements: Achievements,
+  // stats: Stats,
+  // achievements: Achievements,
 }
 </script>
 <template>

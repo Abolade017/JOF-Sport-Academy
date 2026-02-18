@@ -3,7 +3,7 @@ import { PlayerProfile } from '../../stores/PlayerProfileStore'
 const props = defineProps<{ player: PlayerProfile | null }>()
 </script>
 <template>
-  <div class="px-10">
+  <div class="px-6 md:px-10">
     <div class="text-lg font-bold text-[#1F1F1F] font-zalando-condensed uppercase pb-6">
       statistics
     </div>

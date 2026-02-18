@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import {
-  ArrowLongRightIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  PauseIcon,
-  PlayIcon,
-} from '@heroicons/vue/16/solid'
+import { ArrowLongRightIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/16/solid'
 import NewsPageSubHeader from '../common/NewsPageSubHeader.vue'
 import NextPrevButton from '../common/NextPrevButton.vue'
-import { computed, onMounted, reactive, ref } from 'vue'
-import VideoCard from '../common/VideoCard.vue'
+import { computed, onMounted, ref } from 'vue'
 import { useVideosStore } from '../../stores/useLatestVideoStore'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import OverLayImage from '../News/OverLayImage.vue'
-
+import VideoCard from '../common/VideoCard.vue'
 dayjs.extend(relativeTime)
 const videoStore = useVideosStore()
 onMounted(async () => {
@@ -93,6 +86,13 @@ const playPause = (index: number, isPlaying: boolean) => {
     playingIndex.value = null
   }
 }
+// const emit = defineEmits<{
+//   (e: 'play-pause', state: boolean): void
+// }>()
+
+// const handlePlayPause = (state: boolean) => {
+//   emit('play-pause', state)
+// }
 </script>
 
 <template>
@@ -124,13 +124,18 @@ const playPause = (index: number, isPlaying: boolean) => {
       </div>
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 pt-8 md:mt-10 px-6 md:px-0 pb-8">
         <div v-for="(video, index) in videos" :key="index" class="relative w-full">
-          <OverLayImage
-            type="video"
-            :time="dayjs(video.published_at).fromNow()"
-            :videoUrl="video.video_url"
-            :title="video.title"
-            @play-pause="(state) => playPause(index, state)"
-          />
+          <OverLayImage class="h-[479px] w-full md:w-[286px]">
+            <VideoCard
+              :url="video.video_url"
+              :time="dayjs(video.published_at).fromNow()"
+              type="video"
+              class="h-[479px] w-full md:w-[286px]"
+            >
+              <div class="uppercase text-white text-lg leading-5 fomt-semibold">
+                {{ video.title }}
+              </div></VideoCard
+            >
+          </OverLayImage>
         </div>
       </div>
       <!--   <div class="grid grid-cols-1 md:grid-cols-4 gap-6 pt-8 md:mt-10 px-6 md:px-0 pb-8">

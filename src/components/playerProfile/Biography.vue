@@ -7,7 +7,7 @@ const fullName = computed(() =>
 )
 </script>
 <template>
-  <div class="px-10">
+  <div class="px-6 md:px-10">
     <div v-if="props.player" class="space-y-4 font-zalando">
       <div class="text-lg font-bold text-[#1F1F1F] font-zalando-condensed uppercase pb-6">
         biography

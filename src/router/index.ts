@@ -9,6 +9,7 @@ import NewsView from '@/views/NewsView.vue'
 import NewsDetails from '@/views/NewsDetails.vue'
 import ContactUs from '@/views/ContactUs.vue'
 import TheAcademy from '@/views/TheAcademy.vue'
+import Video from '@/views/Video.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
 
@@ -30,8 +31,8 @@ const router = createRouter({
     },
     { path: '/registration', name: 'registration', component: RegistrationView },
     { path: '/contact-us', name: 'contact-us', component: ContactUs },
-    { path: '/the-academy', name: 'the-academy', component: TheAcademy }
-
+    { path: '/the-academy', name: 'the-academy', component: TheAcademy },
+    { path: '/videos', name: "videos", component: Video }
   ],
 })
 

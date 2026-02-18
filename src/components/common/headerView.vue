@@ -43,12 +43,19 @@
             </li>
           </ul>
         </div>
-        <RouterLink
+        <a
+          href="https://jayteeojo.atlassian.net/servicedesk/customer/portal/2/create/8"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hidden md:block font-semibold text-sm text-[#318750] bg-white px-4 py-2 uppercase"
+          >Register</a
+        >
+        <!-- <RouterLink
           to="/registration"
           class="hidden md:block font-semibold text-sm text-[#318750] bg-white px-4 py-2 uppercase"
         >
           Register
-        </RouterLink>
+        </RouterLink> -->
         <div v-if="mobile" class="absolute top-full right-0 w-60 bg-white shadow-md py-4 md:hidden">
           <ul class="flex flex-col gap-y-4">
             <li v-for="link in links" :key="link.name">
@@ -61,12 +68,21 @@
           </ul>
         </div>
         <div class="flex justify-center items-center mr-10 md:hidden">
-          <RouterLink
+          <a
+            href="https://jayteeojo.atlassian.net/servicedesk/customer/portal/2/create/8"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-semibold text-sm text-[#369458] bg-white p-2 w-fit uppercase"
+          >
+            Register</a
+          >
+          <!-- <RouterLink
             to="/registration"
             class="font-semibold text-sm text-[#369458] bg-white p-2 w-fit uppercase"
           >
             Register
-          </RouterLink>
+          </RouterLink> -->
+          <!-- https://jayteeojo.atlassian.net/servicedesk/customer/portal/2/create/8 -->
         </div>
         <div class="md:hidden">
           <Bars3Icon
@@ -99,7 +115,7 @@ const links = [
   { name: 'News', to: '/news' },
   { name: 'Fixtures & results', to: '/fixtures' },
   { name: 'Teams', to: '/teams' },
-  { name: 'videos', to: '/contact' },
+  { name: 'videos', to: '/videos' },
   { name: 'The Academy', to: '/the-academy' },
   { name: 'Contact us', to: '/contact-us' },
 ]

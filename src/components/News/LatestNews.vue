@@ -19,12 +19,24 @@
         </div>
         <div v-else-if="videoStore.error"></div>
         <div v-else-if="featuredVideo" class="relative w-full">
-          <OverLayImage
+          <!-- <OverLayImage
             type="video"
             :time="dayjs(featuredVideo.published_at).fromNow()"
             :videoUrl="featuredVideo.video_url"
             :title="featuredVideo.title"
-          />
+          /> -->
+          <OverLayImage class="h-[479px] w-full md:w-[286px]">
+            <VideoCard
+              :url="featuredVideo.video_url"
+              :time="dayjs(featuredVideo.published_at).fromNow()"
+              type="video"
+              class="h-[479px] w-full md:w-[286px]"
+            >
+              <div class="uppercase text-white text-lg leading-5 fomt-semibold">
+                {{ featuredVideo.title }}
+              </div></VideoCard
+            >
+          </OverLayImage>
         </div>
       </div>
     </div>
@@ -60,6 +72,7 @@ import LoadingState from '../common/loadingState.vue'
 import { useVideosStore } from '../../stores/useLatestVideoStore'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import VideoCard from '../common/VideoCard.vue'
 
 dayjs.extend(relativeTime)
 const store = useLatestNews()
