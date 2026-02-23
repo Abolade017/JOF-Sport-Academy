@@ -77,34 +77,39 @@
           >
             please Fill the form below
           </div>
-          <form action="" class="pt-6">
+          <form action="" @submit.prevent="handleSUbmit" class="pt-6">
             <div>
               <div>
-                <Label name="first name" /> <Input v-model="firstname" type="text" class="mt-2" />
+                <Label name="first name" />
+                <Input v-model="store.contactUs.first_name" type="text" class="mt-2" />
               </div>
               <div class="pt-5">
                 <Label name="last name" />
-                <Input v-model="lastname" type="text" class="mt-2" />
+                <Input v-model="store.contactUs.last_name" type="text" class="mt-2" />
               </div>
 
               <div class="pt-5">
-                <PhoneInput class="" v-model="phone" label="phone number" />
+                <PhoneInput class="" v-model="store.contactUs.phone_number" label="phone number" />
               </div>
               <div class="pt-5">
                 <Label name="email" />
-                <Input v-model="email" type="email" class="mt-2" />
+                <Input v-model="store.contactUs.email" type="email" class="mt-2" />
               </div>
               <div class="pt-5">
                 <Label name="How can we help you?" />
                 <textarea
                   class="border border-[#BFBFBF] focus:outline-none pl-3 w-full h-[113px] resize-none mt-2"
-                  v-model="howTohelp"
+                  v-model="store.contactUs.message"
                 />
               </div>
             </div>
             <div class="flex space-x-6 pt-5">
-              <Button type="button" text="Cancel" color="primary" @click="" />
-              <Button type="button" text="Send message" color="secondary" @click="" />
+              <Button type="button" text="Cancel" color="primary" @click="store.resetForm" />
+              <Button
+                type="submit"
+                :text="store.loading ? 'Sending...' : 'Send message'"
+                color="secondary"
+              />
             </div>
           </form>
         </div>
@@ -120,17 +125,26 @@ import {
   faTwitter,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Label from '../components/Registration/Label.vue'
 import Input from '../components/Registration/Input.vue'
 import PhoneInput from '../components/Registration/PhoneInput.vue'
 import 'vue-tel-num-input/style.css'
 import 'vue-tel-num-input/flags.css'
 import Button from '../components/Registration/Button.vue'
+import { useContactStore } from '../stores/UseContactUsStore'
+import { toast, type ToastOptions } from 'vue3-toastify'
+
 const socialMediaLinks = [faInstagram, faYoutube, faLinkedin, faTwitter, faFacebookF]
-const firstname = ref('')
-const lastname = ref('')
-const phone = ref('')
-const email = ref('')
-const howTohelp = ref('')
+
+const store = useContactStore()
+const handleSUbmit = async () => {
+  await store.sendMessage()
+  if (!store.error) {
+    toast.success('Message sent successfully!', {
+      autoClose: 1000,
+      position: toast.POSITION.TOP_RIGHT,
+    } as ToastOptions)
+  }
+}
 </script>
