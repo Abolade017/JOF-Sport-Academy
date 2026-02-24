@@ -20,7 +20,7 @@ const props = defineProps<{
           {{ props.leagueName }}
         </p>
       </div>
-      <div><img :src="props.leagueLogo" alt="League Logo" class="h-16 w-16" /></div>
+      <div><img :src="props.leagueLogo ?? undefined" alt="League Logo" class="h-16 w-16" /></div>
     </div>
     <div class="px-8">
       <div class="py-4 flex justify-between items-center space-x-4 px-0 md:px-[47px] pt-10">
@@ -28,7 +28,9 @@ const props = defineProps<{
           <div class="text-[#262626] font-semibold text-sm md:text-base uppercase">
             {{ props.homeTeam }}
           </div>
-          <div><img :src="props.homeTeamLogo" alt="Home Team Logo" class="h-16 w-16" /></div>
+          <div>
+            <img :src="props.homeTeamLogo ?? undefined" alt="Home Team Logo" class="h-16 w-16" />
+          </div>
         </div>
         <div class="flex flex-col space-y-1">
           <div
@@ -43,7 +45,9 @@ const props = defineProps<{
           </p>
         </div>
         <div class="flex space-x-2 items-center">
-          <div><img :src="props.awayTeamLogo" alt="Away Team Logo" class="h-16 w-16" /></div>
+          <div>
+            <img :src="props.awayTeamLogo ?? undefined" alt="Away Team Logo" class="h-16 w-16" />
+          </div>
           <div class="text-[#262626] font-semibold text-sm md:text-base uppercase">
             {{ props.awayTeam }}
           </div>

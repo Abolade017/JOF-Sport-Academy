@@ -23,6 +23,9 @@ onMounted(async () => {
 const videos = computed(() => {
   return videoStore.videos
 })
+const formatTime = (date: string) => {
+  return dayjs(date).fromNow()
+}
 const playingIndex = ref<number | null>(null)
 const startIndex = ref(0)
 const ITEMS_PER_PAGE = 4
@@ -75,7 +78,7 @@ watch(isModalOpen, (val) => {
         <NewsPageSubHeader
           action="see all videos"
           class="uppercase text-[#318750] text-xs md:text-sm font-semibold"
-          url="/news"
+          url="/videos"
           ><div class="text-[#1F1F1F] font-medium sm:text-20px md:text-[36px] uppercase">
             Latest video
           </div>
@@ -100,7 +103,7 @@ watch(isModalOpen, (val) => {
           <OverLayImage class="h-[479px] w-full md:w-[286px]">
             <VideoCard
               :url="video.video_url"
-              :time="dayjs(video.published_at).fromNow()"
+              :time="formatTime(video.published_at)"
               @openFullScreen="openModal(video)"
               type="video"
               class="h-[459px] w-full md:w-[286px]"

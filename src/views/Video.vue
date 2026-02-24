@@ -23,7 +23,9 @@ const getEmbedUrl = (url: string) => {
   const videoId = url.split('v=')[1]?.split('&')[0] ?? ''
   return `https://www.youtube.com/embed/${videoId}`
 }
-
+const formatTime = (date: string) => {
+  return dayjs(date).fromNow()
+}
 const isModalOpen = ref(false)
 
 const openModal = (video: Video) => {
@@ -33,6 +35,14 @@ const openModal = (video: Video) => {
 const videos = computed(() => {
   return videoStore.videos
 })
+const latestVideos = computed(() =>
+  videos.value.filter((video) =>
+    video.categories.some((name) => name.slug.toLowerCase() === 'latest'),
+  ),
+)
+const highlightVideos = computed(() =>
+  videos.value.filter((video) => video.categories.some((name) => name.slug === 'highlight')),
+)
 </script>
 <template>
   <div class="w-full md:max-w-[1216px] mx-auto">
@@ -44,14 +54,14 @@ const videos = computed(() => {
       </h1>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div
-          v-for="(video, index) in videos"
+          v-for="(video, index) in latestVideos"
           :key="index"
           class="relative h-[459px] w-full md:w-[389px]"
         >
           <OverLayImage class="h-[459px] w-full md:w-[389px]">
             <VideoCard
               :url="video.video_url"
-              :time="dayjs(video.published_at).fromNow()"
+              :time="formatTime(video.published_at)"
               :title="video.title"
               @openFullScreen="openModal(video)"
               type="video"
@@ -75,14 +85,14 @@ const videos = computed(() => {
       </h1>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div
-          v-for="(video, index) in videos"
+          v-for="(video, index) in highlightVideos"
           :key="index"
           class="relative h-[459px] w-full md:w-[389px]"
         >
           <OverLayImage class="h-[459px] w-full md:w-[389px]">
             <VideoCard
               :url="video.video_url"
-              :time="dayjs(video.published_at).fromNow()"
+              :time="formatTime(video.published_at)"
               :title="video.title"
               @openFullScreen="openModal(video)"
               type="video"
@@ -118,7 +128,7 @@ const videos = computed(() => {
               class="bg-transparent"
               height="367"
               width="938"
-              :src="selectedVideo?.video_url ? getEmbedUrl(selectedVideo.video_url) : ''"
+              :src="selectedVideo?.video_url && getEmbedUrl(selectedVideo.video_url)"
             ></iframe>
           </div>
         </div>

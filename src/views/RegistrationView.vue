@@ -45,13 +45,6 @@ const isFormValid = computed(() => {
 })
 const submit = async () => {
   if (!isStep4Valid.value) return
-  // if (!isFormValid.value) return
-  // {
-  // toast('Please complete all required fields', {
-  //   autoClose: 1500,
-  // })
-  // return
-  // }
   try {
     await store.submitFullRegistrationForm()
 
@@ -98,7 +91,7 @@ const backToHome = () => {
       <div class="font-zalando font-bold text-[#1F1F1F] text-xl md:text-[22px] uppercase">
         Register for 2025/2026 session
       </div>
-      <button class="flex items-center space-x-2 cursor-pointer" @click="router.push('/')">
+      <button class="flex items-center space-x-2 cursor-pointer" @click="$router.push('/')">
         <XMarkIcon class="text-[#454545] h-[18px] w-[18px]" />
         <div class="text-[#454545] text-sm font-zalando font-semibold">Cancel</div>
       </button>
@@ -135,7 +128,7 @@ const backToHome = () => {
           />
           <Button
             type="submit"
-            v-if="activeStep === steps[steps.length - 1].component"
+            v-if="activeStep === steps[steps.length - 1]?.component"
             text="Submit"
             color="secondary"
             :disabled="!isStep4Valid || store.loading"

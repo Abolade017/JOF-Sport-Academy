@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 gap-x-0 md:gap-x-44 pb-6 md:px-0 px-6">
+    <div class="grid pb-6 md:px-0 px-6">
+      <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 gap-x-0 md:gap-x-44 pb-6 md:px-0 px-6"> -->
       <div class="md:col-span-2 col-span-1">
         <div v-if="store.loading">
           <LoadingState />
@@ -13,18 +14,12 @@
           @click="goToNewsDetails(featured.slug)"
         />
       </div>
-      <div class="">
+      <!-- <div class="">
         <div v-if="videoStore.loading">
           <div class="h-[473px] w-[286px] animate-pulse bg-gray-300"></div>
         </div>
         <div v-else-if="videoStore.error"></div>
         <div v-else-if="featuredVideo" class="relative w-full">
-          <!-- <OverLayImage
-            type="video"
-            :time="dayjs(featuredVideo.published_at).fromNow()"
-            :videoUrl="featuredVideo.video_url"
-            :title="featuredVideo.title"
-          /> -->
           <OverLayImage class="h-[479px] w-full md:w-[286px]">
             <VideoCard
               :url="featuredVideo.video_url"
@@ -39,7 +34,7 @@
             >
           </OverLayImage>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:px-0 px-6">
       <ArticleCard
@@ -49,8 +44,7 @@
         @click="goToNewsDetails(article.slug)"
       />
     </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:mt-6 pb-8">
+    <!-- <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:mt-6 pb-8">
       <div v-for="(video, index) in videos" :key="index" class="relative w-full">
         <OverLayImage class="h-[459px] w-full md:w-[389px]">
           <VideoCard
@@ -95,7 +89,7 @@
           </div>
         </div>
       </template>
-    </Modal>
+    </Modal> -->
   </div>
 </template>
 <script setup lang="ts">

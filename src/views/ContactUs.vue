@@ -62,10 +62,12 @@
               <div class="flex space-x-4 pt-4">
                 <div
                   class="bg-[#C1DECB] flex justify-center items-center rounded-lg h-10 w-10"
-                  v-for="icon in socialMediaLinks"
-                  :key="icon.iconName"
+                  v-for="(icon, index) in socialMediaLinks"
+                  :key="index"
                 >
-                  <font-awesome-icon :icon="icon" class="text-[#318750] h-6 items-center" />
+                  <a :href="icon.linkUrl" target="_blank" rel="noopener noreferrer">
+                    <font-awesome-icon :icon="icon.icon" class="text-[#318750] h-6 items-center" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -135,8 +137,13 @@ import Button from '../components/Registration/Button.vue'
 import { useContactStore } from '../stores/UseContactUsStore'
 import { toast, type ToastOptions } from 'vue3-toastify'
 
-const socialMediaLinks = [faInstagram, faYoutube, faLinkedin, faTwitter, faFacebookF]
-
+const socialMediaLinks = [
+  { linkUrl: '', icon: faInstagram },
+  { linkUrl: '', icon: faYoutube },
+  { linkUrl: '', icon: faLinkedin },
+  { linkUrl: '', icon: faTwitter },
+  { linkUrl: '', icon: faFacebookF },
+]
 const store = useContactStore()
 const handleSUbmit = async () => {
   await store.sendMessage()

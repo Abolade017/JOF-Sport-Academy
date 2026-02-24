@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { PlayerProfile } from '../../stores/PlayerProfileStore'
+import type { PlayerProfile } from '@/types/PlayerProfile'
 const props = defineProps<{ player: PlayerProfile | null }>()
 const fullName = computed(() =>
   props.player ? `${props.player.first_name} ${props.player.last_name}` : '',

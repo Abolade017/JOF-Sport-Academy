@@ -1,25 +1,11 @@
 <script setup lang="ts">
 import { ArrowLongRightIcon } from '@heroicons/vue/16/solid'
 import NewsPageSubHeader from '../common/NewsPageSubHeader.vue'
-import { articles } from '../../data'
 import FeaturedArticleCard from '../articles/FeaturedArticleCard.vue'
 import ArticleCard from '../articles/ArticleCard.vue'
 import { useLatestNews } from '../../stores/UseLatestNewsStore'
 import { computed, onMounted } from 'vue'
-interface Category {
-  name: string
-  slug: string
-}
-interface Article {
-  id: number
-  title: string
-  slug: string
-  excerpt: string
-  published_at: string
-  thumbnail_url: string
-  video_url: null
-  categories: Category[]
-}
+
 const store = useLatestNews()
 onMounted(async () => {
   await store.fetchLatestNews()

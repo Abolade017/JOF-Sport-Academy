@@ -25,42 +25,14 @@ import RegistrationButton from '../common/RegistrationButton.vue'
             <p class="text-[10px] md:text-base mb-6 text-white">
               Join a development pathway built to turn raw talent into real opportunity.
             </p>
-            <RegistrationButton text="REGISTER FOR OUR ACADEMY" class="bg-white text-[#2f6b3f]" />
+            <RegistrationButton
+              text="REGISTER FOR OUR ACADEMY"
+              class="bg-white text-[#2f6b3f]"
+              linkUrl="https://jayteeojo.atlassian.net/servicedesk/customer/portal/2/create/8 "
+            />
           </div>
         </div>
       </div>
-      <!-- <div class="flex flex-col md:flex-row h-[280px] items-center"> -->
-      <!-- <div class="relative md:w-1/2 w-full h-full">
-        <img
-          src="/assets/images/Vector.png"
-          alt="Football academy"
-          class="absolute h-full w-full"
-        /> -->
-      <!-- <div
-          class="bg-[url(public/assets/images/darkgreenbg.png)] md:w-1/2 w-full h-full relative"
-        ></div> -->
-      <!-- <div class="absolute -right-20 top-0 h-full w-20 bg-[#173E25] -skew-x-12"></div> -->
-      <!-- </div> -->
-      <!-- <div
-          class="relative md:w-1/2 w-full h-full flex items-center bg-[url(public/assets/images/greenBgImage.png)]"
-        > -->
-      <!-- <div class="px-6 md:px-12 max-w-lg text-white">
-            <h2 class="text-2xl md:text-3xl font-bold mb-3">
-              START YOUR FOOTBALL JOURNEY WITH JOFSA
-            </h2>
-
-            <p class="text-sm md:text-base mb-6 text-white/90">
-              Join a development pathway built to turn raw talent into real opportunity.
-            </p>
-
-            <button
-              class="bg-white text-[#2f6b3f] font-semibold px-6 py-3 text-sm hover:bg-gray-100 transition"
-            >
-              REGISTER FOR OUR ACADEMY
-            </button>
-          </div> -->
-      <!-- </div> -->
-      <!-- </div> -->
     </section>
   </div>
 </template>

@@ -26,6 +26,9 @@ const componentsMap: any = {
   Video,
 }
 const selectedTab = ref(tabs[0])
+const activeComponent = computed(() => {
+  return selectedTab.value ? componentsMap[selectedTab.value.component] : null
+})
 </script>
 <template>
   <div class="pb-[162px]">
@@ -78,7 +81,9 @@ const selectedTab = ref(tabs[0])
               @click="selectedTab = tab"
               :class="[
                 'w-full py-4 uppercase text-[#1F1F1F] text-sm md:text-[16px] font-medium cursor-pointer pl-4 md:pl-[22px',
-                selectedTab.name === tab.name ? 'border-l-4 border-red-500' : 'border-none',
+                selectedTab && selectedTab.name === tab.name
+                  ? 'border-l-4 border-red-500'
+                  : 'border-none',
               ]"
             >
               {{ tab.name }}
@@ -88,8 +93,8 @@ const selectedTab = ref(tabs[0])
         <div class="w-full md:w-2/3">
           <!-- <KeepAlive> -->
           <component
-            :is="componentsMap[selectedTab.component]"
-            :key="selectedTab.component"
+            :is="activeComponent"
+            :key="selectedTab?.component"
             :player="{
               first_name: player.first_name,
               last_name: player.last_name,

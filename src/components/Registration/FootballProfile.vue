@@ -6,12 +6,12 @@ import RegistrationForm from './RegistrationForm.vue'
 import Input from './Input.vue'
 import PhoneInput from './PhoneInput.vue'
 import { watch } from 'vue'
-import {
-  useRegistrationStore,
+import { useRegistrationStore } from '../../stores/RegistrationStore'
+import type {
   ProfilePreferredPositionsEnum,
   ProfileStrongFootEnum,
   ProfileMedicalConditionsEnum,
-} from '../../stores/RegistrationStore'
+} from '@/types/ProfileTypes'
 const store = useRegistrationStore()
 const selectedPosition = computed({
   get: () => store.footballProfile.profile_preferred_positions,

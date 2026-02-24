@@ -33,7 +33,7 @@ watch(
   options,
   (teams) => {
     if (teams.length && !selectedTeam.value) {
-      selectedTeam.value = teams[0]
+      selectedTeam.value = teams[0] ?? ''
     }
   },
   { immediate: true },
@@ -43,7 +43,7 @@ watch(
   competitions,
   (list) => {
     if (list.length && !selectedCompetition.value) {
-      selectedCompetition.value = list[0]
+      selectedCompetition.value = list[0] ?? ''
     }
   },
   { immediate: true },
@@ -86,6 +86,9 @@ const componentsMap: any = {
   results: Results,
   table: Table,
 }
+const activeComponent = computed(() => {
+  return activeTab.value ? componentsMap[activeTab.value] : null
+})
 </script>
 
 <template>
@@ -161,7 +164,7 @@ const componentsMap: any = {
     </div>
     <div class="py-6 md:py-20">
       <!-- <KeepAlive> -->
-      <component :is="componentsMap[activeTab]" :filters="filters" />
+      <component :is="activeComponent" :filters="filters" />
       <!-- </KeepAlive> -->
     </div>
   </div>

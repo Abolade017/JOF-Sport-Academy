@@ -21,7 +21,6 @@ const openIndex = ref<boolean[]>([])
 const store = useUnplayedFixtureStore()
 onMounted(async () => {
   await newsStore.fetchLatestNews()
-  openIndex.value = await store.fixtures.map((_, index) => index === 0)
 })
 
 watch(
@@ -32,31 +31,17 @@ watch(
   { immediate: true, deep: true },
 )
 
-// const liveScores = computed(() => {
-//   return store.fixtures.find((match) => match.is_played === true)
-// })
 const liveScores = computed(() => {
   const now = dayjs()
-
   return (
     store.fixtures.find((match) => {
       const kickoff = dayjs(match.match_date)
-
       // match is live if now is between kickoff and kickoff + 120 minutes
       return now.isAfter(kickoff) && now.isBefore(kickoff.add(120, 'minute'))
     }) || null
   )
 })
-// const News = reactive([
-//   {
-//     image: '/assets/images/News/newsB.png',
-//     title: 'JOFSA King Launches Youth Academy to Nurture Future Talent',
-//   },
-//   {
-//     image: '/assets/images/News/newsA.png',
-//     title: 'JOFSA King Signs New Sponsorship Deal with SportsBrand',
-//   },
-// ])
+
 const News = computed(() => newsStore.latestNews)
 const groupedFixtures = computed(() => {
   const groups: Record<string, any[]> = {}
@@ -70,6 +55,15 @@ const groupedFixtures = computed(() => {
     matches: groups[month],
   }))
 })
+watch(
+  groupedFixtures,
+  (newGroups) => {
+    if (newGroups.length > 0) {
+      openIndex.value = newGroups.map((_, index) => index === 0)
+    }
+  },
+  { immediate: true },
+)
 const handleToggle = (index: number) => {
   openIndex.value[index] = !openIndex.value[index]
 }

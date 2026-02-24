@@ -41,10 +41,10 @@ const rankedTableRows = computed(() => {
   })
 })
 const leagueTitle = computed(() => {
-  if (!leagueTable.table.length) return ''
+  const firstRow = leagueTable.table?.[0] // optional chaining
+  if (!firstRow) return '' // handle empty table
 
-  const { competition, season_year } = leagueTable.table[0]
-
+  const { competition, season_year } = firstRow
   return `${competition} ${season_year}/${season_year + 1}`
 })
 

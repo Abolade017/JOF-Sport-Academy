@@ -23,13 +23,13 @@
         </div>
       </div>
       <div class="mt-4 md:mt-8">
-        <component :is="componentsMap[selectedTab]" />
+        <component :is="activeComponent" />
       </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 // import QueensNews from '../components/News/QueensNews.vue'
 // import KingsNews from '../components/News/KingsNews.vue'
 // import KidsNews from '../components/News/KidsNews.vue'
@@ -44,7 +44,7 @@ const tabs = [
   // { name: 'Princes', component: 'PrincesNews' },
 ]
 
-const selectedTab = ref(tabs[0].component)
+const selectedTab = ref(tabs[0]?.component)
 const componentsMap: any = {
   LatestNews,
   // QueensNews,
@@ -52,4 +52,7 @@ const componentsMap: any = {
   // KidsNews,
   // PrincesNews,
 }
+const activeComponent = computed(() => {
+  return selectedTab.value ? componentsMap[selectedTab.value] : null
+})
 </script>

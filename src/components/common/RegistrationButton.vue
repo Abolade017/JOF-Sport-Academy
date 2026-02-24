@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ text: string }>()
+const props = defineProps<{ text: string; linkUrl: string }>()
 const emit = defineEmits<{
   (e: 'click'): void
 }>()
@@ -9,10 +9,12 @@ const handleClick = () => {
 </script>
 
 <template>
-  <button
-    @click="handleClick"
+  <a
+    :href="props.linkUrl"
+    target="_blank"
+    rel="noopener noreferrer"
     class="text-[10px] md:text-[13px] font-semibold px-4 py-2 text-sm uppercase font-zalando cursor-pointer"
   >
-    {{ text }}
-  </button>
+    {{ props.text }}
+  </a>
 </template>

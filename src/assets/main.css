@@ -2,13 +2,13 @@
 @import "tailwindcss";
 @font-face {
   font-family: "Nippo";
-  src: url("@/assets/fonts/Nippo-Bold.woff2") format("woff2");
+  src: url("/public/assets/fonts/nippo-font/Nippo-Bold.otf") format("woff2");
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Zalando Sans Condensed";
-  src: url("@/assets/fonts/ZalandoSansCondensed-VariableFont_wght.woff2")
+  src: url("/public/assets/fonts/zalando-sans-condensed/condensed/ZalandoSans-Condensed.ttf")
     format("woff2");
   font-display: swap;
 }

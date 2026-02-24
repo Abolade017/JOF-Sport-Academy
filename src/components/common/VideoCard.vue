@@ -4,12 +4,10 @@ import { computed, ref } from 'vue'
 const props = defineProps<{
   url?: string
   time: string
-  // title: string
   type: string
 }>()
 const emit = defineEmits<{
   (e: 'openFullScreen'): void
-  // (e 'playPause', value: boolean): void
 }>()
 const videoRef = ref<HTMLVideoElement | null>(null)
 const isPlaying = ref(false)

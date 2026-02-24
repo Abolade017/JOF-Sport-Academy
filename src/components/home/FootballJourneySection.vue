@@ -53,6 +53,7 @@ const carousels = computed(() => store.carousels)
           Join a development pathway built to turn raw talent into real opportunity.
         </div>
         <RegistrationButton
+          linkUrl=""
           class="bg-[#318750] text-white mt-[24.32px]"
           text="Register for our academy "
         />
@@ -63,7 +64,7 @@ const carousels = computed(() => store.carousels)
           <div v-for="carousel in carousels" :key="carousel.id">
             <!-- <div class="flex flex-col gap-4"> -->
             <TrainingCard
-              :image="carousel.image_url"
+              :image="carousel.image_url ?? ''"
               headline="JOFSA players during JayTee Ojo Foundation early-morning training.
 "
             />

@@ -1,17 +1,23 @@
 import { defineStore } from 'pinia'
 import axiosInstance from '@/api/axiosInstance'
 import { AxiosError } from 'axios'
-export type GenderEnum = "Male" | "Female" | "Other"
+import type {
+  ProfilePreferredPositionsEnum,
+  ProfileStrongFootEnum,
+  ProfileMedicalConditionsEnum,
+  GenderEnum
+} from '@/types/ProfileTypes'
+// export type GenderEnum = "Male" | "Female" | "Other"
 
-export type ProfilePreferredPositionsEnum =
-  | "Goalkeeper"
-  | "Defender"
-  | "Midfielder"
-  | "Forward"
+// export type ProfilePreferredPositionsEnum =
+//   | "Goalkeeper"
+//   | "Defender"
+//   | "Midfielder"
+//   | "Forward"
 
-export type ProfileStrongFootEnum = "Right" | "Left" | "Both"
+// export type ProfileStrongFootEnum = "Right" | "Left" | "Both"
 
-export type ProfileMedicalConditionsEnum = "Yes" | "No"
+// export type ProfileMedicalConditionsEnum = "Yes" | "No"
 
 interface PlayerInfo {
   "first_name": string,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowLongUpIcon, ArrowUpIcon } from '@heroicons/vue/16/solid'
+import { ArrowLongUpIcon } from '@heroicons/vue/16/solid'
 import {
   faWhatsapp,
   faFacebook,
@@ -10,8 +10,23 @@ import {
 } from '@fortawesome/free-brands-svg-icons'
 const links = ['Privacy Policy', 'cookie Policy', 'Terms & Conditions']
 const teams = ['king', 'princes', 'kids', 'queen']
-const extraLinks = ['register', 'contact us', 'our programs', 'partners']
-const socialMediaLinks = [faWhatsapp, faFacebook, faTiktok, faYoutube, faInstagram, faXTwitter]
+const extraLinks = [
+  {
+    name: 'register',
+    linkUrl: 'https://jayteeojo.atlassian.net/servicedesk/customer/portal/2/create/8',
+  },
+  { name: 'contact us', linkUrl: '/contact-us' },
+  { name: 'our programs', linkUrl: '/' },
+  { name: 'partners', linkUrl: '/' },
+]
+const socialMediaLinks = [
+  { linkUrl: '', icon: faWhatsapp },
+  { linkUrl: '', icon: faFacebook },
+  { linkUrl: '', icon: faTiktok },
+  { linkUrl: '', icon: faYoutube },
+  { linkUrl: '', icon: faInstagram },
+  { linkUrl: '', icon: faXTwitter },
+]
 const scrollToTop = () => {
   window.scrollTo({
     top: 0,
@@ -30,12 +45,15 @@ const scrollToTop = () => {
             class="md:h-[143px] h-[100px] w-20 md:w-[129px] object-cover"
           />
           <div class="flex space-x-6 items-center pt-6">
-            <font-awesome-icon
-              v-for="icon in socialMediaLinks"
-              :key="icon.iconName"
-              :icon="icon"
-              class="text-white h-6"
-            />
+            <a
+              :href="icon.linkUrl"
+              v-for="(icon, index) in socialMediaLinks"
+              :key="index"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <font-awesome-icon :icon="icon.icon" class="text-white h-6" />
+            </a>
           </div>
         </div>
         <div
@@ -56,13 +74,14 @@ const scrollToTop = () => {
           <div class="">
             <h6 class="uppercase text-white mb-2">Extra links</h6>
             <div class="flex flex-col space-y-2">
-              <div
-                v-for="link in extraLinks"
-                :key="link"
+              <a
+                :href="link.linkUrl"
+                v-for="(link, index) in extraLinks"
+                :key="index"
                 class="text-white text-base font-medium capitalize"
               >
-                {{ link }}
-              </div>
+                {{ link.name }}
+              </a>
             </div>
           </div>
         </div>

@@ -2,24 +2,12 @@
 import { computed } from 'vue'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-
-interface Category {
-  name: string
-  slug: string
-}
-interface NewsDetails {
-  id: number
-  title: string
-  slug: string
-  excerpt: string
-  published_at: string
-  thumbnail_url: string
-  video_url: string
-  categories: Category[]
-}
+import type { NewsDetails } from '@/types/newsDetails'
 
 dayjs.extend(relativeTime)
-
+const formatTime = (date: string) => {
+  return dayjs(date).fromNow()
+}
 const props = defineProps<{
   article: NewsDetails
 }>()
@@ -32,7 +20,7 @@ const category = computed(() => {
     Array.isArray(props.article.categories) &&
     props.article.categories.length > 0
   ) {
-    return props.article.categories[0].name || ''
+    return props.article?.categories[0]?.name || ''
   }
 })
 const image = computed(() => props.article.thumbnail_url)
@@ -61,7 +49,7 @@ const title = computed(() => props.article.title)
         </div>
 
         <div class="mt-auto pt-6 text-[12px] text-[#595959]">
-          {{ dayjs(time).fromNow() }}
+          {{ formatTime(time) }}
         </div>
       </div>
     </div>

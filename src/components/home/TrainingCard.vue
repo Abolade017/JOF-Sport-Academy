@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps<{ image: string; headline: string }>()
+const props = defineProps<{ image?: string; headline?: string }>()
 </script>
 <template>
   <div class="border border-[#D9D9D9] w-[318px] h-[301px]">

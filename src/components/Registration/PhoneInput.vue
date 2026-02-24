@@ -24,8 +24,8 @@ const countryLabelMap: Record<string, string> = {
 // const internalModel = ref<TelInputInitModel | string>(props.modelValue ?? { search: '' })
 const internalModel = ref<TelInputInitModel | null>(null)
 watch(internalModel, (val) => {
-  if (val.value) {
-    emit('update:modelValue', val.value)
+  if (val?.value) {
+    emit('update:modelValue', val?.value)
   } else {
     emit('update:modelValue', '')
   }

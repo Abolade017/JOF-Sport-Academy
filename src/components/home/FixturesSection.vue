@@ -4,9 +4,9 @@ import NextPrevButton from '../common/NextPrevButton.vue'
 import { computed, onMounted, reactive, ref } from 'vue'
 import CurrentMatchScore from '../Fixtures/fixturesTabComponents/CurrentMatchScore.vue'
 import NewsPageSubHeader from '../common/NewsPageSubHeader.vue'
-import { useFixtureStore, Fixtures } from '../../stores/useAllFixturesStore'
+import { useFixtureStore } from '../../stores/useAllFixturesStore'
+import type { Fixtures } from '@/types/Fixtures'
 import { formatToWAT, formatToTime } from '../../utils/dateHelper'
-import dayjs from 'dayjs'
 
 const store = useFixtureStore()
 onMounted(async () => {

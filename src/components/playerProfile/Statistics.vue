@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PlayerProfile } from '../../stores/PlayerProfileStore'
+import type { PlayerProfile } from '@/types/PlayerProfile'
 const props = defineProps<{ player: PlayerProfile | null }>()
 </script>
 <template>

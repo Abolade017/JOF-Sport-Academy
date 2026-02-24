@@ -65,6 +65,9 @@ const playPause = (index: number, isPlaying: boolean) => {
 const videos = computed(() => {
   return videoStore.videos
 })
+const formatTime = (date: string) => {
+  return dayjs(date).fromNow()
+}
 // const videos = reactive([
 //   {
 //     video: '/assets/videos/video4.mp4',
@@ -121,7 +124,7 @@ const videos = computed(() => {
         <OverLayImage class="h-[459px] w-full md:w-[389px]">
           <VideoCard
             :url="video.video_url"
-            :time="dayjs(video.published_at).fromNow()"
+            :time="formatTime(video.published_at)"
             :title="video.title"
             type="video"
             class="h-[459px] w-full md:w-[389px]"

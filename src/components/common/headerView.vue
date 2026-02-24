@@ -14,12 +14,15 @@
           </div>
         </div>
         <div class="flex space-x-10 md:space-x-6 items-center h-full md:py-0 py-3">
-          <font-awesome-icon
-            v-for="icon in socialMediaLinks"
-            :key="icon.iconName"
-            :icon="icon"
-            class="text-white h-6"
-          />
+          <a
+            :href="icon.linkUrl"
+            v-for="(icon, index) in socialMediaLinks"
+            :key="index"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <font-awesome-icon :icon="icon.icon" class="text-white h-6" />
+          </a>
         </div>
       </div>
     </div>
@@ -109,7 +112,14 @@ import {
   faTiktok,
   faYoutube,
 } from '@fortawesome/free-brands-svg-icons'
-const socialMediaLinks = [faWhatsapp, faFacebook, faTiktok, faYoutube, faInstagram, faXTwitter]
+const socialMediaLinks = [
+  { linkUrl: '', icon: faWhatsapp },
+  { linkUrl: '', icon: faFacebook },
+  { linkUrl: '', icon: faTiktok },
+  { linkUrl: '', icon: faYoutube },
+  { linkUrl: '', icon: faInstagram },
+  { linkUrl: '', icon: faXTwitter },
+]
 const mobile = ref(false)
 const links = [
   { name: 'News', to: '/news' },
@@ -120,7 +130,7 @@ const links = [
   { name: 'Contact us', to: '/contact-us' },
 ]
 const headers = [
-  { name: 'About the academy', url: '/' },
+  { name: 'About the academy', url: '/the-academy' },
   { name: 'partners', url: '/' },
   { name: 'support us', url: '/' },
 ]

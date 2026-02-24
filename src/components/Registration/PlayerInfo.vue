@@ -4,7 +4,8 @@ import Input from './Input.vue'
 import Label from './Label.vue'
 import FormSelect from './FormSelect.vue'
 import RegistrationForm from './RegistrationForm.vue'
-import { useRegistrationStore, GenderEnum } from '../../stores/RegistrationStore'
+import { useRegistrationStore } from '../../stores/RegistrationStore'
+import type { GenderEnum } from '@/types/ProfileTypes'
 const store = useRegistrationStore()
 const emit = defineEmits<{
   (e: 'step-valid', value: boolean): void
