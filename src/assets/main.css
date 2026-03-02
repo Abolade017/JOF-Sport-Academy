@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Zalando+Sans:ital,wght@0,200..900;1,200..900&display=swap");
+@import "tailwindcss";
+@font-face {
+  font-family: "Nippo";
+  src: url("/public/assets/fonts/nippo-font/Nippo-Bold.otf") format("woff2");
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Zalando Sans Condensed";
+  src: url("/public/assets/fonts/zalando-sans-condensed/condensed/ZalandoSans-Condensed.ttf")
+    format("woff2");
+  font-display: swap;
+}
+@theme {
+  --font-zalando-condensed: "Zalando Sans Condensed", sans-serif;
+  --font-zalando: "Zalando Sans", sans-serif;
+  --font-nippo: "Nippo", sans-serif;
+  --bg-gradient: linear-gradient(270deg, #318750 42.07%, #173e25 100%);
+  --fixtures-pattern: repeating-linear-gradient(
+    -45deg,
+    #1e5130 0px,
+    #1e5130 40px,
+    #26693e 40px,
+    #26693e 80px
+  );
+  --player-pattern: repeating-linear-gradient(
+    -45deg,
+    #e4e3e3 0px,
+    #e4e3e3 40px,
+    #bfbfbf 40px,
+    #bfbfbf 80px
+  );
+  --bg-diagonal-stripes: linear-gradient(
+    180deg,
+    rgba(54, 148, 88) 1.26%,
+    rgba(39, 105, 63, 0.4) 32%,
+    rgba(23, 62, 37, 0.8) 100%
+  );
+
+  /* --bg-diagonal-stripes: linear-gradient(
+      135deg,
+      #26693e 25%,
+      #1e5130 25%,
+      #1e5130 50%,
+      #26693e 50%,
+      #26693e 75%,
+      #1e5130 75%,
+      #1e5130 100%,
+      #26693e 100%
+    ),
+    linear-gradient(
+      45deg,
+      #26693e 25%,
+      #1e5130 25%,
+      #1e5130 50%,
+      #26693e 50%,
+      #26693e 75%,
+      #1e5130 75%,
+      #1e5130 100%,
+      #26693e 100%
+    ); */
+
+  /* --bg-diagonal-size: 200px 200px; */
+}
+@layer utilities {
+  .bg-fixtures-header {
+    background-image: var(--fixtures-pattern);
+  }
+  .bg-player-pattern {
+    background-image: var(--player-pattern);
+  }
+  .bg-diagonal-pattern {
+    background-image: var(--bg-diagonal-stripes);
+    /* background-size: var(--bg-diagonal-size); */
+  }
+  .--bg-gradient {
+    background-image: var(--bg-gradient);
+  }
+}
