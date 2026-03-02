@@ -72,7 +72,22 @@ watch(isModalOpen, (val) => {
 </script>
 
 <template>
-  <div class="bg-[#F5F6F7] h-[759px]">
+  <div v-if="videoStore.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96">
+    <LoadingState />
+  </div>
+  <div
+    v-else-if="videoStore.error"
+    class="flex justify-center items-center h-96 text-[#262626] font-zalando"
+  >
+    {{ videoStore.error }}
+  </div>
+  <div
+    v-else-if="!videoStore.loading && videos.length === 0"
+    class="flex justify-center items-center h-96 text-[#262626] font-zalando"
+  >
+    Videos not found
+  </div>
+  <div v-else class="bg-[#F5F6F7] h-[759px]">
     <div class="w-full md:max-w-[1216px] mx-auto font-zalando">
       <div class="flex justify-between items-center pt-8 md:pt-24 md:px-0 px-6">
         <NewsPageSubHeader

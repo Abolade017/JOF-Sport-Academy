@@ -91,7 +91,8 @@
               </div>
 
               <div class="pt-5">
-                <Input type="tel" v-model="store.contactUs.phone_number" />
+                <Label name="phone number" />
+                <Input type="tel" v-model="store.contactUs.phone_number" class="mt-2" />
                 <!-- <PhoneInput class="" v-model="store.contactUs.phone_number" label="phone number" /> -->
               </div>
               <div class="pt-5">

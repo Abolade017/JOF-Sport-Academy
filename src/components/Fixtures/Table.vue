@@ -21,8 +21,8 @@ watch(
   },
   { immediate: true, deep: true },
 )
-const loading = computed(() => leagueTable.loading)
-const error = computed(() => leagueTable.error)
+// const loading = computed(() => leagueTable.loading)
+// const error = computed(() => leagueTable.error)
 const rankedTableRows = computed(() => {
   // 1. Sort by points DESC
   const sorted = [...leagueTable.table].sort((a, b) => b.points - a.points)
@@ -71,14 +71,18 @@ const News = reactive([
 </script>
 <template>
   <div class="flex flex-col space-x-0 md:flex-row md:space-x-10 px-4 md:px-0">
-    <div v-if="loading" class="">
-      <LoadingState />
-    </div>
-    <div v-if="leagueTable.error">{{ leagueTable.error }}</div>
-    <div v-else-if="leagueTable.loading"><LoadingState /></div>
-
     <div class="w-full md:w-2/3">
-      <LeagueTable :title="props.filters.competition + ' ' + props.filters.year">
+      <div v-if="leagueTable.loading" class="">
+        <LoadingState />
+      </div>
+      <div v-else-if="leagueTable.error">{{ leagueTable.error }}</div>
+      <div
+        v-else-if="!leagueTable.loading && leagueTable.table.length === 0"
+        class="font-zalando flex justify-center items-center h-96 text-[#262626]"
+      >
+        LeagueTable is not found
+      </div>
+      <LeagueTable v-else :title="props.filters.competition + ' ' + props.filters.year">
         <tr
           v-for="(row, index) in rankedTableRows"
           :key="index"

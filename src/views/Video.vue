@@ -6,6 +6,7 @@ import { useVideosStore } from '../stores/useLatestVideoStore'
 import OverLayImage from '../components/News/OverLayImage.vue'
 import VideoCard from '../components/common/VideoCard.vue'
 import Modal from '../components/common/Modal.vue'
+import LoadingState from '@/components/common/loadingState.vue'
 interface Video {
   video_url: string
   title: string
@@ -52,28 +53,45 @@ const highlightVideos = computed(() =>
       >
         Latest
       </h1>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div
-          v-for="(video, index) in latestVideos"
-          :key="index"
-          class="relative h-[459px] w-full md:w-[389px]"
-        >
-          <OverLayImage class="h-[459px] w-full md:w-[389px]">
-            <VideoCard
-              :url="video.video_url"
-              :time="formatTime(video.published_at)"
-              :title="video.title"
-              @openFullScreen="openModal(video)"
-              type="video"
-              class="h-[459px] w-full md:w-[389px]"
-            >
-              <div
-                class="capitalize text-white text-lg md:text-[28px] leading-8 fomt-semibold font-zalando"
+      <div v-if="videoStore.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96">
+        <LoadingState />
+      </div>
+      <div
+        v-else-if="videoStore.error"
+        class="flex justify-center items-center h-96 text-[#262626] font-zalando"
+      >
+        {{ videoStore.error }}
+      </div>
+      <div
+        v-else-if="!videoStore.loading && latestVideos.length === 0"
+        class="flex justify-center items-center h-96 text-[#262626] font-zalando"
+      >
+        Videos not found
+      </div>
+      <div v-else>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            v-for="(video, index) in latestVideos"
+            :key="index"
+            class="relative h-[459px] w-full md:w-[389px]"
+          >
+            <OverLayImage class="h-[459px] w-full md:w-[389px]">
+              <VideoCard
+                :url="video.video_url"
+                :time="formatTime(video.published_at)"
+                :title="video.title"
+                @openFullScreen="openModal(video)"
+                type="video"
+                class="h-[459px] w-full md:w-[389px]"
               >
-                {{ video.title }}
-              </div></VideoCard
-            >
-          </OverLayImage>
+                <div
+                  class="capitalize text-white text-lg md:text-[28px] leading-8 fomt-semibold font-zalando"
+                >
+                  {{ video.title }}
+                </div></VideoCard
+              >
+            </OverLayImage>
+          </div>
         </div>
       </div>
     </div>
@@ -83,28 +101,35 @@ const highlightVideos = computed(() =>
       >
         highlights
       </h1>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div
-          v-for="(video, index) in highlightVideos"
-          :key="index"
-          class="relative h-[459px] w-full md:w-[389px]"
-        >
-          <OverLayImage class="h-[459px] w-full md:w-[389px]">
-            <VideoCard
-              :url="video.video_url"
-              :time="formatTime(video.published_at)"
-              :title="video.title"
-              @openFullScreen="openModal(video)"
-              type="video"
-              class="h-[459px] w-full md:w-[389px]"
-            >
-              <div
-                class="capitalize text-white text-lg md:text-[28px] leading-8 fomt-semibold font-zalando"
+      <div v-if="videoStore.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96">
+        <LoadingState />
+      </div>
+      <div v-else-if="videoStore.error">{{ videoStore.error }}</div>
+      <div v-else-if="!videoStore.loading && highlightVideos.length === 0">Videos not found</div>
+      <div v-else>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            v-for="(video, index) in highlightVideos"
+            :key="index"
+            class="relative h-[459px] w-full md:w-[389px]"
+          >
+            <OverLayImage class="h-[459px] w-full md:w-[389px]">
+              <VideoCard
+                :url="video.video_url"
+                :time="formatTime(video.published_at)"
+                :title="video.title"
+                @openFullScreen="openModal(video)"
+                type="video"
+                class="h-[459px] w-full md:w-[389px]"
               >
-                {{ video.title }}
-              </div></VideoCard
-            >
-          </OverLayImage>
+                <div
+                  class="capitalize text-white text-lg md:text-[28px] leading-8 fomt-semibold font-zalando"
+                >
+                  {{ video.title }}
+                </div></VideoCard
+              >
+            </OverLayImage>
+          </div>
         </div>
       </div>
     </div>

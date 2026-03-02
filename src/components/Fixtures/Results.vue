@@ -83,7 +83,7 @@ const loading = computed(() => {
       <div v-else-if="store.error">{{ store.error }}</div>
       <div
         v-else-if="!store.loading && groupedFixtures.length === 0"
-        class="font-zalando flex justify-center items-center h-96"
+        class="font-zalando flex justify-center items-center h-96 text-[#262626]"
       >
         Results are not available
       </div>

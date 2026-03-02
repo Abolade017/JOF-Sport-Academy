@@ -75,7 +75,12 @@ const prev = () => {
 
 <template>
   <div class="bg-[url('/assets/images/field.png')] h-fit bg-no-repeat bg-cover">
-    <div class="flex flex-col space-y-2 mx-auto md:max-w-[1216px]">
+    <div v-if="store.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96">
+      <div class="animate-pulse bg-gray-300 h-[88px] w-full mb-10"></div>
+    </div>
+    <div v-else-if="store.error">{{ store.error }}</div>
+    <div v-else-if="!store.loading && filteredNews.length === 0">Videos not found</div>
+    <div v-else class="flex flex-col space-y-2 mx-auto md:max-w-[1216px]">
       <div class="flex justify-between items-center mt-[120px] md:mt-[423px] md:px-0 px-6">
         <div
           class="text-white text-lg md:text-[58px] leading-6 md:leading-[68px] font-medium font-zalando uppercase"

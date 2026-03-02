@@ -7,6 +7,7 @@ import NewsPageSubHeader from '../common/NewsPageSubHeader.vue'
 import { useFixtureStore } from '../../stores/useAllFixturesStore'
 import type { Fixtures } from '../../types/Fixtures'
 import { formatToWAT, formatToTime } from '../../utils/dateHelper'
+import LoadingState from '../common/loadingState.vue'
 
 const store = useFixtureStore()
 onMounted(async () => {
@@ -36,9 +37,21 @@ const prev = () => {
 }
 </script>
 <template>
-  <div v-if="store.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96"></div>
-  <div v-if="store.error">{{ store.error }}</div>
-  <div v-if="!store.loading && liveScores.length === 0">Fixtures not found</div>
+  <div v-if="store.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96">
+    <LoadingState />
+  </div>
+  <div
+    v-else-if="store.error"
+    class="flex justify-center items-center h-96 text-[#262626] font-zalando"
+  >
+    {{ store.error }}
+  </div>
+  <div
+    v-else-if="!store.loading && liveScores.length === 0"
+    class="flex justify-center items-center h-96 text-[#262626] font-zalando"
+  >
+    Fixtures not found
+  </div>
   <div
     v-else
     class="striped w-full md:max-w-[1216px] mx-auto bg-green-900 font-zalando bg-no-repeat bg-cover"

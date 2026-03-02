@@ -37,7 +37,9 @@ const activeComponent = computed(() => {
         <Braedcrumbs />
       </div> -->
     </div>
-    <div v-if="store.loading" class="p-10 text-center"><LoadingState /></div>
+    <div v-if="store.loading" class="p-10 text-center">
+      <LoadingState class="max-w-7xl mx-auto" />
+    </div>
 
     <div v-else-if="store.error" class="p-10 text-red-600 text-center">
       {{ store.error }}
