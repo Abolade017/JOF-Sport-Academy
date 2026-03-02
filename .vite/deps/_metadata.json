@@ -2,7 +2,57 @@
   "hash": "8ca5a7ef",
   "configHash": "74fce8a9",
   "lockfileHash": "0c7e6278",
-  "browserHash": "407e6a08",
-  "optimized": {},
-  "chunks": {}
+  "browserHash": "167e4a39",
+  "optimized": {
+    "vue": {
+      "src": "../../node_modules/.pnpm/vue@3.5.29_typescript@5.9.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "10fc2ea1",
+      "needsInterop": false
+    },
+    "pinia": {
+      "src": "../../node_modules/.pnpm/pinia@3.0.4_typescript@5.9.3_vue@3.5.29_typescript@5.9.3_/node_modules/pinia/dist/pinia.mjs",
+      "file": "pinia.js",
+      "fileHash": "47ef2f37",
+      "needsInterop": false
+    },
+    "@fortawesome/fontawesome-svg-core": {
+      "src": "../../node_modules/.pnpm/@fortawesome+fontawesome-svg-core@7.2.0/node_modules/@fortawesome/fontawesome-svg-core/index.mjs",
+      "file": "@fortawesome_fontawesome-svg-core.js",
+      "fileHash": "c5215b19",
+      "needsInterop": false
+    },
+    "@fortawesome/vue-fontawesome": {
+      "src": "../../node_modules/.pnpm/@fortawesome+vue-fontawesome@3.1.3_@fortawesome+fontawesome-svg-core@7.2.0_vue@3.5.29_typescript@5.9.3_/node_modules/@fortawesome/vue-fontawesome/index.es.js",
+      "file": "@fortawesome_vue-fontawesome.js",
+      "fileHash": "e6f4b0e8",
+      "needsInterop": false
+    },
+    "vue3-toastify": {
+      "src": "../../node_modules/.pnpm/vue3-toastify@0.2.8_vue@3.5.29_typescript@5.9.3_/node_modules/vue3-toastify/dist/index.mjs",
+      "file": "vue3-toastify.js",
+      "fileHash": "f436913a",
+      "needsInterop": false
+    },
+    "@fortawesome/free-brands-svg-icons": {
+      "src": "../../node_modules/.pnpm/@fortawesome+free-brands-svg-icons@7.2.0/node_modules/@fortawesome/free-brands-svg-icons/index.mjs",
+      "file": "@fortawesome_free-brands-svg-icons.js",
+      "fileHash": "f22992e1",
+      "needsInterop": false
+    },
+    "vue-router": {
+      "src": "../../node_modules/.pnpm/vue-router@4.6.4_vue@3.5.29_typescript@5.9.3_/node_modules/vue-router/dist/vue-router.mjs",
+      "file": "vue-router.js",
+      "fileHash": "a2fd6bb4",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-UB3LGCFU": {
+      "file": "chunk-UB3LGCFU.js"
+    },
+    "chunk-CQEJUMFI": {
+      "file": "chunk-CQEJUMFI.js"
+    }
+  }
 }
