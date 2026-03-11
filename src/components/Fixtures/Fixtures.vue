@@ -67,6 +67,51 @@ watch(
 const handleToggle = (index: number) => {
   openIndex.value[index] = !openIndex.value[index]
 }
+const addAllFixturesToCalendar = () => {
+  if (!store.fixtures.length) return
+
+  const formatDate = (date: dayjs.Dayjs) => date.utc().format('YYYYMMDDTHHmmss[Z]')
+
+  let events = ''
+
+  store.fixtures.forEach((match) => {
+    const start = dayjs(match.match_date)
+    const end = start.add(2, 'hour') // match duration
+
+    events += `
+BEGIN:VEVENT
+UID:${match.id}@yourapp.com
+DTSTAMP:${formatDate(dayjs())}
+DTSTART:${formatDate(start)}
+DTEND:${formatDate(end)}
+SUMMARY:${match.home_team.name} vs ${match.away_team.name}
+DESCRIPTION:${match.competition}
+LOCATION:${match.venue}
+END:VEVENT
+`
+  })
+
+  const icsContent = `
+BEGIN:VCALENDAR
+VERSION:2.0
+CALSCALE:GREGORIAN
+${events}
+END:VCALENDAR
+`
+
+  const blob = new Blob([icsContent], {
+    type: 'text/calendar;charset=utf-8;',
+  })
+
+  const url = URL.createObjectURL(blob)
+
+  const link = document.createElement('a')
+  link.href = url
+  link.setAttribute('download', 'fixtures.ics')
+  document.body.appendChild(link)
+  link.click()
+  document.body.removeChild(link)
+}
 </script>
 <template>
   <div class="flex flex-col space-x-0 md:flex-row md:space-x-10 px-4 md:px-0">
@@ -111,11 +156,13 @@ const handleToggle = (index: number) => {
     </div>
     <div class="w-full md:w-1/3">
       <div class="flex flex-col space-y-6 md:space-y-10">
-        <div
+        <button
+          @click="addAllFixturesToCalendar"
+          :disabled="!store.fixtures.length"
           class="bg-[#D10303] text-white font-semibold font-zalando text-xs md:text-sm h-7 md:h-9 w-[229px] flex justify-center items-center md:ml-44 ml-0"
         >
           ADD FIXTURE TO CALENDAR
-        </div>
+        </button>
         <div class="flex flex-col space-y-4">
           <CurrentMatchScore
             v-if="liveScores"
