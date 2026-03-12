@@ -42,9 +42,7 @@
                 :to="link.to"
                 target="_blank"
                 class="text-white font-semibold text-sm px-4 py-1.5 uppercase"
-                ><a :href="link.to" target="_blank" rel="noopener noreferrer">{{
-                  link.name
-                }}</a></RouterLink
+                >{{ link.name }}</RouterLink
               >
             </li>
           </ul>
@@ -69,9 +67,7 @@
                 :to="link.to"
                 target="_blank"
                 class="text-[#318750] font-semibold text-sm px-4 py-1.5 uppercase"
-                ><a :href="link.to" target="_blank" rel="noopener noreferrer">{{
-                  link.name
-                }}</a></RouterLink
+                >{{ link.name }}</RouterLink
               >
             </li>
           </ul>
