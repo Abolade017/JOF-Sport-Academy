@@ -40,6 +40,7 @@
             <li v-for="link in links" :key="link.name">
               <RouterLink
                 :to="link.to"
+                target="_blank"
                 class="text-white font-semibold text-sm px-4 py-1.5 uppercase"
                 >{{ link.name }}</RouterLink
               >
