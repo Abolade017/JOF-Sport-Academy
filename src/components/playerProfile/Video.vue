@@ -189,6 +189,7 @@ const formatTime = (date: string) => {
               class="bg-transparent"
               height="367"
               width="938"
+              allowfullscreen="true"
               :src="selectedVideo?.video_url && getEmbedUrl(selectedVideo.video_url)"
             ></iframe>
           </div>

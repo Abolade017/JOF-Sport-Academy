@@ -150,7 +150,7 @@ watch(isModalOpen, (val) => {
           <iframe
             v-else
             class="w-[938px] h-[367px]"
-            allowfullscreen
+            allowfullscreen="true"
             :src="selectedVideo?.video_url ? getEmbedUrl(selectedVideo.video_url) : ''"
           ></iframe>
         </div>

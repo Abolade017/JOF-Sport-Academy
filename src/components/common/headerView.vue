@@ -28,7 +28,7 @@
     </div> -->
     <nav class="bg-[#1E5130] md:shadow none shadow-md relative">
       <div class="flex justify-between items-center gap-4 py-5 max-w-[1250px] mx-auto md:px-0 px-4">
-        <routerLink to="/">
+        <routerLink to="/" target="_blank">
           <img
             src="/assets/images/home/logo.svg"
             alt="sport acadamy logo"
@@ -64,6 +64,7 @@
             <li v-for="link in links" :key="link.name">
               <RouterLink
                 :to="link.to"
+                target="_blank"
                 class="text-[#318750] font-semibold text-sm px-4 py-1.5 uppercase"
                 >{{ link.name }}</RouterLink
               >
