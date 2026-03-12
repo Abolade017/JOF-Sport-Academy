@@ -16,8 +16,7 @@ const extraLinks = [
     linkUrl: 'https://jayteeojo.atlassian.net/servicedesk/customer/portal/2/create/8',
   },
   { name: 'contact us', linkUrl: '/contact-us' },
-  { name: 'our programs', linkUrl: '/' },
-  { name: 'partners', linkUrl: '/' },
+  // { name: 'our programs', linkUrl: '/' },
 ]
 const socialMediaLinks = [
   { linkUrl: '', icon: faWhatsapp },
@@ -70,7 +69,7 @@ const scrollToTop = () => {
                 JOFSA {{ team }}
               </div>
             </div>
-          </div>
+          </div> -->
           <div class="">
             <h6 class="uppercase text-white mb-2">Extra links</h6>
             <div class="flex flex-col space-y-2">
@@ -82,8 +81,9 @@ const scrollToTop = () => {
               >
                 {{ link.name }}
               </a>
+              <a href="#partners" class="text-white text-base font-medium capitalize">partners</a>
             </div>
-          </div> -->
+          </div>
         </div>
         <div class="">
           <button

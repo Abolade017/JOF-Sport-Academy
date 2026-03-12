@@ -7,7 +7,10 @@ const officialPartnersLogo = reactive([
 ])
 </script>
 <template>
-  <div class="flex justify-center items-center h-[255px] md:h-[439.68px] max-w-[1216px] mx-auto">
+  <div
+    class="flex justify-center items-center h-[255px] md:h-[439.68px] max-w-[1216px] mx-auto"
+    id="partners"
+  >
     <div class="h-full flex items-center">
       <div class="w-full md:w-[304.68px]">
         <div
