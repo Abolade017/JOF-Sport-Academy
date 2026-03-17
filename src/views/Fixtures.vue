@@ -52,7 +52,7 @@ watch(
 const filters = computed(() => {
   return {
     competition: selectedCompetition.value ? selectedCompetition.value.toLowerCase() : undefined,
-    team: selectedTeam.value ? selectedTeam.value.toLowerCase() : undefined,
+    team: selectedTeam.value,
     year: selectedYear.value ? Number(selectedYear.value.split('/')[0]) : undefined,
   }
 })

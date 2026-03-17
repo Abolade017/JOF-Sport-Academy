@@ -29,7 +29,7 @@ export const useLeaguetableStore = defineStore('leagueTable', () => {
   // actions
   const fetchLeagueTable = async (filters: {
     competition?: string
-    team?: string
+    // team?: string
     year?: number
   }) => {
     loading.value = true

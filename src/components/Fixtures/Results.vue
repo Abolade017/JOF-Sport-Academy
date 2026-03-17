@@ -46,9 +46,7 @@ const handleToggle = (index: number) => {
   openIndex.value[index] = !openIndex.value[index]
 }
 const fixtureScores = useFixtureResults()
-onMounted(async () => {
-  openIndex.value = fixtureScores.results.map((_, index) => index === 0)
-})
+
 watch(
   () => props.filters,
   async (newFilters) => {
@@ -56,6 +54,7 @@ watch(
   },
   { immediate: true, deep: true },
 )
+
 const groupedFixtures = computed(() => {
   const groups: Record<string, any[]> = {}
   fixtureScores.results.forEach((f) => {
@@ -69,6 +68,15 @@ const groupedFixtures = computed(() => {
     matches: groups[month],
   }))
 })
+watch(
+  groupedFixtures,
+  (groups) => {
+    if (groups.length) {
+      openIndex.value = groups.map((_, index) => index === 0)
+    }
+  },
+  { immediate: true },
+)
 const error = computed(() => {
   fixtureScores.error
 })

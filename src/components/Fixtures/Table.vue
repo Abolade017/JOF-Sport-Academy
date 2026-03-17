@@ -2,7 +2,6 @@
 import { computed, onMounted, reactive, watch } from 'vue'
 import LatestNews from '../common/LatestNews.vue'
 import LeagueTable from '../common/LeagueTable.vue'
-// import { LeagueTableRow } from '../../data'
 import { useLeaguetableStore } from '../../stores/UseLeagueTable'
 import LoadingState from '../common/loadingState.vue'
 const props = defineProps<{
@@ -86,6 +85,12 @@ const News = reactive([
         <tr
           v-for="(row, index) in rankedTableRows"
           :key="index"
+          :class="[
+            'h-18 p-4 border-b border-b-[#DFE2E6]',
+            row.team.name.toLowerCase() === props.filters.team?.toLowerCase()
+              ? 'bg-green-50 border-l-4 border-green-500'
+              : '',
+          ]"
           class="h-18 p-4 border-b border-b-[#DFE2E6]"
         >
           <td class="p-4 text-[#262626] md:text-base text-sm font-medium capitalize text-left">
