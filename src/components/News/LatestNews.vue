@@ -5,8 +5,8 @@
     <div v-if="store.loading">
       <LoadingState />
     </div>
-    <div v-if="store.error">{{ store.error }}</div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div v-else-if="store.error">{{ store.error }}</div>
+    <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <!-- Featured Article -->
       <div v-if="featured" class="md:col-span-2">
         <FeaturedArticleCard
