@@ -28,7 +28,7 @@
     </div> -->
     <nav class="bg-[#1E5130] md:shadow none shadow-md relative">
       <div class="flex justify-between items-center gap-4 py-5 max-w-[1250px] mx-auto md:px-0 px-4">
-        <routerLink to="/" target="_blank">
+        <routerLink to="/" rel="noopener noreferrer">
           <img
             src="/assets/images/home/logo.svg"
             alt="sport acadamy logo"
