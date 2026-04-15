@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-4xl md:px-0 px-4 my-10 md:my-14">
+  <div class="mx-auto max-w-[873.15px] md:px-0 px-4 my-10 md:my-14">
     <div class="font-zalando-condensed font-semibold md:text-[36px] text-xl text-[#262626]">
       Founder Story
     </div>

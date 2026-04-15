@@ -72,7 +72,7 @@ watch(isModalOpen, (val) => {
 </script>
 
 <template>
-  <div v-if="videoStore.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96">
+  <div v-if="videoStore.loading" class="animate-pulse w-full max-w-[1216px] mx-auto h-96">
     <LoadingState />
   </div>
   <div
@@ -88,7 +88,7 @@ watch(isModalOpen, (val) => {
     Videos not found
   </div>
   <div v-else class="bg-[#F5F6F7] h-[759px]">
-    <div class="w-full md:max-w-[1216px] mx-auto font-zalando">
+    <div class="w-full max-w-[1216px] mx-auto font-zalando">
       <div class="flex justify-between items-center pt-8 md:pt-24 md:px-0 px-6">
         <NewsPageSubHeader
           action="see all videos"
@@ -139,7 +139,7 @@ watch(isModalOpen, (val) => {
         class="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
         @click.self="isModalOpen = false"
       >
-        <div class="w-full md:max-w-[938px] mx-auto">
+        <div class="w-full max-w-[938px] mx-auto">
           <video
             class="w-[938px] h-[367px]"
             v-if="selectedVideo && isMp4(selectedVideo.video_url)"

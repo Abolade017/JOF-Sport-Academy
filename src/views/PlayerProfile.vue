@@ -31,14 +31,14 @@ const activeComponent = computed(() => {
 })
 </script>
 <template>
-  <div class="pb-[162px]">
+  <div class="pb-[162px] max-w-[1216px] mx-auto w-full">
     <div class="bg-[#0F2717]">
       <!-- <div class="max-w-[1216px] mx-auto px-4 font-zalando text-[12px] py-1">
         <Braedcrumbs />
       </div> -->
     </div>
     <div v-if="store.loading" class="p-10 text-center">
-      <LoadingState class="max-w-7xl mx-auto" />
+      <LoadingState class="" />
     </div>
 
     <div v-else-if="store.error" class="p-10 text-red-600 text-center">
@@ -47,7 +47,7 @@ const activeComponent = computed(() => {
     <div v-else-if="!player" class="font-zalando flex justify-center items- text-[#595959]">
       Player profile is not available
     </div>
-    <div class="max-w-7xl mx-auto shadow-md" v-else="player">
+    <div class="shadow-md" v-else="player">
       <div class="font-zalando text-[12px] py-1 bg-[#26693E]">
         <div class="flex items-center md:px-0 px-4">
           <div class="flex space-x-10">

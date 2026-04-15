@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col md:flex-row gap-4">
     <div class="md:w-1/2 flex h-[448px] md:h-[896px] items-center justify-center">
-      <div class="flex items-center ml-4 md:ml-[100px] h-full">
+      <div class="flex items-center ml-4 md:ml-0 h-full">
         <div class="flex flex-col gap-[50px] md:gap-[120px]">
           <div>
             <h1 class="text-[#D10303] text-[13px] font-semibold uppercase font-zalando">

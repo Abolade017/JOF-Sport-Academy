@@ -26,7 +26,7 @@ console.log(others.value)
 console.log(featured.value)
 </script>
 <template>
-  <div v-if="store.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96">
+  <div v-if="store.loading" class="animate-pulse w-full max-w-[1216px] mx-auto h-96">
     <LoadingState />
   </div>
   <div
@@ -41,7 +41,7 @@ console.log(featured.value)
   >
     News not found
   </div>
-  <div v-else class="w-full md:max-w-[1216px] mx-auto font-zalando pb-10 md:pb-[83px] md:px-0 px-6">
+  <div v-else class="w-full max-w-[1216px] mx-auto font-zalando pb-10 md:pb-[83px] md:px-0 px-6">
     <div class="flex justify-between items-center pb-5 md:pb-10 pt-8 md:pt-16 md:px-0 px-6">
       <NewsPageSubHeader
         action="see all news"

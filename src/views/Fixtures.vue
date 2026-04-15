@@ -94,7 +94,7 @@ const activeComponent = computed(() => {
 <template>
   <div></div>
   <SubHeader :headerName="headerName" />
-  <div class="max-w-[1250px] mx-auto">
+  <div class="max-w-[1216px] mx-auto">
     <div
       class="flex md:flex-row flex-col space-y-10 justify-between items-center py-4 font-zalando mx-4 md:mx-0"
     >

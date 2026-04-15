@@ -1,6 +1,6 @@
 <template>
   <div class="border-b border-[#D9D9D9]">
-    <div class="mx-auto max-w-3xl my-10 md:my-14 md:px-0 px-4">
+    <div class="mx-auto max-w-[730px] my-10 md:my-14 md:px-0 px-4 w-full">
       <div class="font-semibold font-zalando-condensed text-xl md:text-[36px] text-[#262626]">
         Our Story
       </div>

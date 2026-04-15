@@ -86,7 +86,7 @@ const backToHome = () => {
 }
 </script>
 <template>
-  <div class="max-w-[1216px] mx-auto">
+  <div class="max-w-[1216px] mx-auto w-full">
     <div class="flex justify-between py-[23px] md:px-0 px-4">
       <div class="font-zalando font-bold text-[#1F1F1F] text-xl md:text-[22px] uppercase">
         Register for 2025/2026 session

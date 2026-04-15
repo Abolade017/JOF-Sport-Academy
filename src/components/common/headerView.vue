@@ -27,7 +27,7 @@
       </div>
     </div> -->
     <nav class="bg-[#1E5130] md:shadow none shadow-md relative">
-      <div class="flex justify-between items-center gap-4 py-5 max-w-[1250px] mx-auto md:px-0 px-4">
+      <div class="flex justify-between items-center gap-4 py-5 max-w-[1216px] mx-auto md:px-0 px-4">
         <routerLink to="/" rel="noopener noreferrer">
           <img
             src="/assets/images/home/logo.svg"

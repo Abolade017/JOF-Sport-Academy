@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-3xl mx:px-0 px-4">
+  <div class="mx-auto max-w-[730px] mx:px-0 px-4">
     <div class="my-10 md:my-14">
       <div class="text-[#262626] text-xl md:text-[36px] font-semibold font-zalando-condensed">
         Our Culture

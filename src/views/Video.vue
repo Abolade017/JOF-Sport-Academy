@@ -46,14 +46,14 @@ const highlightVideos = computed(() =>
 )
 </script>
 <template>
-  <div class="w-full md:max-w-[1216px] mx-auto">
+  <div class="w-full max-w-[1216px] mx-auto">
     <div class="py-10 md:py-24 md:px-0 px-6">
       <h1
         class="uppercase text-[24px] md:text-[36px] text-[#262626] font-semibold font-zalando pb-4 md:pb-6"
       >
         Latest
       </h1>
-      <div v-if="videoStore.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96">
+      <div v-if="videoStore.loading" class="animate-pulse h-96">
         <LoadingState />
       </div>
       <div
@@ -140,7 +140,7 @@ const highlightVideos = computed(() =>
           class="fixed inset-0 z-50 flex items-center justify-center bg-black/70"
           @click.self="isModalOpen = false"
         >
-          <div class="w-full md:max-w-[938px] mx-auto bg-none">
+          <div class="w-full max-w-[938px] mx-auto bg-none">
             <video
               class="w-[938px] h-[367px] bg-transparent"
               v-if="selectedVideo && isMp4(selectedVideo.video_url)"

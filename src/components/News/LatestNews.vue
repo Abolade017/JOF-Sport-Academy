@@ -1,31 +1,31 @@
 <template>
   <div class="grid pb-6 md:px-0 px-6">
     <!-- <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 gap-x-0 md:gap-x-44 pb-6 md:px-0 px-6"> -->
+    <div class="max-w-[1216px] mx-auto w-full">
+      <div v-if="store.loading">
+        <LoadingState />
+      </div>
+      <div v-else-if="store.error">{{ store.error }}</div>
+      <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Featured Article -->
+        <div v-if="featured" class="md:col-span-2">
+          <FeaturedArticleCard
+            :article="featured"
+            class="h-[479px] w-full"
+            @click="goToNewsDetails(featured.slug)"
+          />
+        </div>
 
-    <div v-if="store.loading">
-      <LoadingState />
-    </div>
-    <div v-else-if="store.error">{{ store.error }}</div>
-    <div v-else class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Featured Article -->
-      <div v-if="featured" class="md:col-span-2">
-        <FeaturedArticleCard
-          :article="featured"
-          class="h-[479px] w-full"
-          @click="goToNewsDetails(featured.slug)"
+        <!-- Other Articles -->
+        <ArticleCard
+          v-for="article in others"
+          :key="article.id"
+          :article="article"
+          @click="goToNewsDetails(article.slug)"
         />
       </div>
 
-      <!-- Other Articles -->
-      <ArticleCard
-        v-for="article in others"
-        :key="article.id"
-        :article="article"
-        @click="goToNewsDetails(article.slug)"
-      />
-    </div>
-
-    <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:px-0 px-6">
+      <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:px-0 px-6">
       <ArticleCard
         v-for="article in others"
         :key="article.id"
@@ -33,7 +33,7 @@
         @click="goToNewsDetails(article.slug)"
       />
     </div> -->
-    <!-- <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:mt-6 pb-8">
+      <!-- <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:mt-6 pb-8">
       <div v-for="(video, index) in videos" :key="index" class="relative w-full">
         <OverLayImage class="h-[459px] w-full md:w-[389px]">
           <VideoCard
@@ -79,6 +79,7 @@
         </div>
       </template>
     </Modal> -->
+    </div>
   </div>
 </template>
 <script setup lang="ts">

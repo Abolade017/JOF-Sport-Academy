@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-[#F5F5F5]">
-    <div class="max-w-[1216px] mx-auto">
+  <div class="bg-[#F5F5F5] w-full">
+    <div class="max-w-[1216px] mx-auto w-full">
       <div class="flex flex-col md:flex-row gap-12 md:gap-24 py-12 md:py-24">
         <div class="md:w-1/2 w-full">
           <div class="md:pb-[40.5px] pb-4 md:px-0 px-4">

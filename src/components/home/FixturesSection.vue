@@ -37,7 +37,7 @@ const prev = () => {
 }
 </script>
 <template>
-  <div v-if="store.loading" class="animate-pulse w-full md:max-w-[1216px] mx-auto h-96">
+  <div v-if="store.loading" class="animate-pulse w-full max-w-[1216px] mx-auto h-96">
     <LoadingState />
   </div>
   <div
@@ -54,23 +54,23 @@ const prev = () => {
   </div>
   <div
     v-else
-    class="striped w-full md:max-w-[1216px] mx-auto bg-green-900 font-zalando bg-no-repeat bg-cover"
+    class="striped w-full max-w-[1216px] mx-auto bg-green-900 font-zalando bg-no-repeat bg-cover"
   >
-    <div class="flex justify-between items-center pt-8 md:pt-16 md:px-0 px-6">
+    <div
+      class="flex justify-between items-center pt-8 md:pt-16 px-6 md:px-0 max-w-[1140px] mx-auto"
+    >
       <NewsPageSubHeader
         action="see all fixtures"
         class="uppercase text-[#C1DECB] text-xs md:text-sm font-semibold"
         url="/fixtures"
       >
-        <div class="text-white font-medium sm:text-[20px] md:text-[36px] uppercase pl-0 md:pl-16">
-          fixtures
-        </div>
+        <div class="text-white font-medium sm:text-[20px] md:text-[36px] uppercase">fixtures</div>
         <template #icon>
           <ArrowLongRightIcon class="text-[#C1DECB] w-3 h-3 md:h-[18px] md:w-[18px]" />
         </template>
       </NewsPageSubHeader>
 
-      <div class="flex pr-0 md:pr-16">
+      <div class="flex">
         <NextPrevButton :disabled="startIndex === 0" @click="prev">
           <ChevronLeftIcon
             class="bg-[#EAEFFC] text-[#D4D4D4 flex justify-center items-center p-1.5 md:p-3 h-8 md:h-12 md:w-12"
@@ -84,7 +84,7 @@ const prev = () => {
       </div>
     </div>
     <div
-      class="flex md:flex-row flex-col px-0 pt-5 pb-8 gap-y-4 gap-x-0 md:pt-10 md:pb-16 md:gap-x-6 md:gap-y-0 mx-6 md:mx-16"
+      class="flex md:flex-row flex-col pt-5 pb-8 gap-y-4 gap-x-0 md:pt-10 md:pb-16 md:gap-x-6 md:gap-y-0 md:px-0 px-6 max-w-[1140px] mx-auto"
     >
       <div
         class="w-full md:w-1/3"

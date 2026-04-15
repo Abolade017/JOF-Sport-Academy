@@ -4,7 +4,7 @@ import RegistrationButton from '../common/RegistrationButton.vue'
 
 <template>
   <div class="bg-[#F5F6F7] w-full h-[278px] font-zalando">
-    <section class="w-full md:max-w-[1216px] mx-auto h-full flex items-center">
+    <section class="w-full max-w-[1216px] mx-auto h-full flex items-center">
       <div class="relative h-auto md:h-[198px] px-0 md:mx-[84px]">
         <img
           src="/assets/images/Vector.png"
