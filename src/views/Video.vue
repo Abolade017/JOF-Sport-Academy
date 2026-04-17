@@ -142,7 +142,7 @@ const highlightVideos = computed(() =>
         >
           <div class="w-full max-w-[938px] mx-auto bg-none">
             <video
-              class="w-[938px] h-[367px] bg-transparent"
+              class="w-[938px] h-[367px] md:w-[938px] w-[300px] bg-transparent"
               v-if="selectedVideo && isMp4(selectedVideo.video_url)"
               :src="selectedVideo.video_url"
               controls
@@ -150,7 +150,7 @@ const highlightVideos = computed(() =>
             />
             <iframe
               v-else-if="selectedVideo"
-              class="bg-transparent"
+              class="bg-transparent md:w-[938px] w-[300px] mx-auto"
               height="367"
               width="938"
               allowfullscreen="true"

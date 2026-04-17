@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import type { NewsDetails } from '../../types/newsDetails'
@@ -23,7 +23,12 @@ const category = computed(() => {
     return props.article?.categories[0]?.name || ''
   }
 })
-const image = computed(() => props.article.thumbnail_url)
+const fallbackImage = '/assets/images/articleImage1.png'
+const imgSrc = ref(props.article.thumbnail_url || fallbackImage)
+const handleError = () => {
+  imgSrc.value = fallbackImage
+}
+// const image = computed(() => props.article.thumbnail_url)
 const description = computed(() => props.article.excerpt)
 const time = computed(() => props.article.published_at)
 const title = computed(() => props.article.title)
@@ -32,7 +37,12 @@ const title = computed(() => props.article.title)
   <article class="shadow-sm border border-[#F0F0F0] cursor-pointer" @click="emit('click')">
     <div class="flex flex-col md:flex-row gap-2 font-zalando">
       <div class="w-full md:w-1/2">
-        <img :src="image" alt="article image" class="w-full h-60 md:h-[473px] object-cover" />
+        <img
+          :src="imgSrc"
+          @error="handleError"
+          alt="article image"
+          class="w-full h-60 md:h-[473px] object-cover"
+        />
       </div>
 
       <div class="bg-white w-full md:w-1/2 px-3 md:px-6 pt-6 pb-6 md:h-[473px] flex flex-col">

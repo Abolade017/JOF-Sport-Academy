@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import type { NewsDetails } from '../../types/newsDetails'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
@@ -23,6 +23,12 @@ const categoryName = computed(() => {
     return props.article.categories[0]?.name ?? null
   }
 })
+const fallbackImage = '/assets/images/articleImage1.png'
+
+const imgSrc = ref(props.article?.thumbnail_url || fallbackImage)
+const handleError = () => {
+  imgSrc.value = fallbackImage
+}
 </script>
 <template>
   <article
@@ -31,7 +37,8 @@ const categoryName = computed(() => {
   >
     <div class="w-full overflow-hidden">
       <img
-        :src="article?.thumbnail_url"
+        :src="imgSrc"
+        @error="handleError"
         alt="article image"
         class="w-full h-[227px] object-cover"
       />
