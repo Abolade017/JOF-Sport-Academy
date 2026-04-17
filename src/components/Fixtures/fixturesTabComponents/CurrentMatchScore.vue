@@ -22,7 +22,10 @@ const props = defineProps<{
         <div class="uppercase font-bold text-[#262626] text-sm">{{ props.date }}</div>
         <div class="uppercase text-xs font-normal text-[#595959]">{{ competition }}</div>
       </div>
-      <div><img :src="props.LeagueLogo" alt="League Logo" class="h-16 w-16" /></div>
+      <div>
+        <img :src="props.LeagueLogo" alt="League Logo" class="h-16 w-16" v-if="props.LeagueLogo" />
+        <div v-else class="h-16 w-16 bg-gray-400"></div>
+      </div>
     </div>
     <div class="flex justify-between items-center px-[45.5px] pt-10 md:pt-20 h-fit">
       <!-- <div class="md:w-16 md:h-16 h-10 w-10">
@@ -54,7 +57,13 @@ const props = defineProps<{
     <div class="flex justify-between items-center mx-[25px] pt-2">
       <div class="flex flex-col gap-y-2 items-center">
         <div class="">
-          <img :src="props.homeTeamLogo" alt="Home Team Logo" class="md:h-16 md:w-16 h-10 w-10" />
+          <img
+            :src="props.homeTeamLogo"
+            alt="Home Team Logo"
+            class="md:h-16 md:w-16 h-10 w-10"
+            v-if="props.homeTeamLogo"
+          />
+          <div v-else class="md:h-16 md:w-16 h-10 w-10 bg-gray-400"></div>
         </div>
         <div class="text-[#262626] text-[13px] font-semibold uppercase text-center">
           {{ props.homeTeam }}
@@ -77,7 +86,13 @@ const props = defineProps<{
       </div>
       <div class="flex flex-col gap-y-2 items-center">
         <div>
-          <img :src="props.awayTeamLogo" alt="Away Team Logo" class="md:h-16 md:w-16 h-10 w-10" />
+          <img
+            :src="props.awayTeamLogo"
+            alt="Away Team Logo"
+            class="md:h-16 md:w-16 h-10 w-10"
+            v-if="props.awayTeamLogo"
+          />
+          <div v-else class="md:h-16 md:w-16 h-10 w-10 bg-gray-400"></div>
         </div>
         <div class="text-[#262626] text-[13px] font-semibold uppercase text-center">
           {{ props.awayTeam }}

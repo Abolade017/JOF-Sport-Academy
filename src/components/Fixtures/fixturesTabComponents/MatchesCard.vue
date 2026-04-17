@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const props = defineProps<{
   date: string | null
   leagueName: string | null
@@ -20,7 +22,15 @@ const props = defineProps<{
           {{ props.leagueName }}
         </p>
       </div>
-      <div><img :src="props.leagueLogo ?? undefined" alt="League Logo" class="h-16 w-16" /></div>
+      <div>
+        <img
+          :src="props.leagueLogo ?? undefined"
+          alt="League Logo"
+          class="h-16 w-16"
+          v-if="props.leagueLogo"
+        />
+        <div v-else class="h-16 w-16 bg-gray-400"></div>
+      </div>
     </div>
     <div class="px-8">
       <div class="py-4 flex justify-between items-center space-x-4 px-0 md:px-[47px] pt-10">
@@ -29,7 +39,13 @@ const props = defineProps<{
             {{ props.homeTeam }}
           </div>
           <div>
-            <img :src="props.homeTeamLogo ?? undefined" alt="Home Team Logo" class="h-16 w-16" />
+            <img
+              :src="props.homeTeamLogo ?? undefined"
+              alt="Home Team Logo"
+              class="h-16 w-16"
+              v-if="props.homeTeamLogo"
+            />
+            <div v-else class="h-16 w-16 bg-gray-400"></div>
           </div>
         </div>
         <div class="flex flex-col space-y-1">
@@ -46,7 +62,12 @@ const props = defineProps<{
         </div>
         <div class="flex space-x-2 items-center">
           <div>
-            <img :src="props.awayTeamLogo ?? undefined" alt="Away Team Logo" class="h-16 w-16" />
+            <img
+              :src="props.awayTeamLogo ?? undefined"
+              alt="Away Team Logo"
+              class="h-16 w-16"
+              v-if="props.awayTeamLogo"
+            />
           </div>
           <div class="text-[#262626] font-semibold text-sm md:text-base uppercase">
             {{ props.awayTeam }}
