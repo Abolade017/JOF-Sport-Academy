@@ -8,6 +8,7 @@ import MatchesCard from './fixturesTabComponents/MatchesCard.vue'
 import { useFixtureResults } from '../../stores/UseFixturesResultStore'
 import dayjs from 'dayjs'
 import { formatToTime, formatToWAT } from '../../utils/dateHelper'
+import { useLatestNews } from '@/stores/UseLatestNewsStore'
 const props = defineProps<{
   filters: {
     competition?: string
@@ -29,16 +30,22 @@ const liveScores = reactive({
   awayTeamLogo: '/assets/images/jofsa.png',
   stadium: 'Moshood abiola stadium',
 })
-const News = reactive([
-  {
-    image: '/assets/images/News/newsB.png',
-    title: 'JOFSA King Launches Youth Academy to Nurture Future Talent',
-  },
-  {
-    image: '/assets/images/News/newsA.png',
-    title: 'JOFSA King Signs New Sponsorship Deal with SportsBrand',
-  },
-])
+// const News = reactive([
+//   {
+//     image: '/assets/images/News/newsB.png',
+//     title: 'JOFSA King Launches Youth Academy to Nurture Future Talent',
+//   },
+//   {
+//     image: '/assets/images/News/newsA.png',
+//     title: 'JOFSA King Signs New Sponsorship Deal with SportsBrand',
+//   },
+// ])
+const newsStore = useLatestNews()
+
+const News = computed(() => newsStore.latestNews)
+onMounted(async () => {
+  await newsStore.fetchLatestNews()
+})
 const store = useFixtureResults()
 // const openIndex = ref(fixtures.map((_, index) => index === 0))
 const openIndex = ref<boolean[]>([])
@@ -58,7 +65,7 @@ watch(
 const groupedFixtures = computed(() => {
   const groups: Record<string, any[]> = {}
   fixtureScores.results.forEach((f) => {
-    const month = dayjs(f.match_date).format('MMMM')
+    const month = dayjs(f.match_date).format('MMMM YYYY')
     if (!groups[month]) groups[month] = []
     groups[month].push(f)
   })
@@ -137,8 +144,8 @@ const loading = computed(() => {
     <div class="w-full md:w-1/3">
       <div class="text-[#1F1F1F] text-lg md:text-[28px] font-bold font-zalando">LATEST NEWS</div>
       <div class="flex flex-col space-y-4 pt-4">
-        <div v-for="(post, index) in News" :key="index">
-          <LatestNews :image="post.image" :title="post.title" />
+        <div v-for="(post, index) in News.slice(0, 2)" :key="index">
+          <LatestNews :image="post.thumbnail_url" :title="post.title" />
         </div>
       </div>
     </div>

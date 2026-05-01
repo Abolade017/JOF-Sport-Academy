@@ -46,10 +46,11 @@ const News = computed(() => newsStore.latestNews)
 const groupedFixtures = computed(() => {
   const groups: Record<string, any[]> = {}
   store.fixtures.forEach((match) => {
-    const month = dayjs(match.match_date).format('MMMM')
+    const month = dayjs(match.match_date).format('MMMM YYYY')
     if (!groups[month]) groups[month] = []
     groups[month].push(match)
   })
+
   return Object.keys(groups).map((month) => ({
     month,
     matches: groups[month],

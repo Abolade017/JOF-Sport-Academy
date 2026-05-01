@@ -68,6 +68,7 @@ const props = defineProps<{
               class="h-16 w-16"
               v-if="props.awayTeamLogo"
             />
+            <div v-else class="h-16 w-16 bg-gray-400"></div>
           </div>
           <div class="text-[#262626] font-semibold text-sm md:text-base uppercase">
             {{ props.awayTeam }}
